@@ -5,11 +5,31 @@ export const prerender = false;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const ALLOWED_LISTS = ['general', 'webcenter'] as const;
+type ListName = (typeof ALLOWED_LISTS)[number];
+
 interface SubscribePayload {
   email?: string;
   list?: string;
   /** Honeypot — if present, silently accept and discard. */
   website?: string;
+}
+
+/**
+ * Map a list name to the configured Resend Audience ID. The general list is
+ * the default for everything except product-specific lists like webcenter.
+ * Falls back to RESEND_AUDIENCE_ID for any list whose dedicated env var is
+ * unset, so adding a new list never silently drops subscribers.
+ */
+function getAudienceId(list: ListName): string | undefined {
+  const env = import.meta.env;
+  switch (list) {
+    case 'webcenter':
+      return env.RESEND_AUDIENCE_ID_WEBCENTER || env.RESEND_AUDIENCE_ID;
+    case 'general':
+    default:
+      return env.RESEND_AUDIENCE_ID;
+  }
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -30,15 +50,18 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonError(400, 'Please enter a valid email address.');
   }
 
-  const list = (body.list ?? 'general').trim().slice(0, 64) || 'general';
+  const rawList = (body.list ?? 'general').trim();
+  const list: ListName = (ALLOWED_LISTS as readonly string[]).includes(rawList)
+    ? (rawList as ListName)
+    : 'general';
 
   const apiKey = import.meta.env.RESEND_API_KEY;
-  const audienceId = import.meta.env.RESEND_AUDIENCE_ID;
+  const audienceId = getAudienceId(list);
   const fromEmail = import.meta.env.RESEND_FROM_EMAIL;
   const notifyTo = import.meta.env.CONTACT_TO_EMAIL;
 
   if (!apiKey || !audienceId) {
-    console.error('Subscribe: missing RESEND_API_KEY or RESEND_AUDIENCE_ID');
+    console.error(`Subscribe: missing RESEND_API_KEY or audience for list "${list}"`);
     return jsonError(500, 'Email signup is temporarily unavailable.');
   }
 

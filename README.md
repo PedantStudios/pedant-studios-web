@@ -30,8 +30,9 @@ Required for forms to work in production. See `.env.example` for the full list.
 |---|---|
 | `RESEND_API_KEY` | Resend API key |
 | `RESEND_FROM_EMAIL` | Verified sender (e.g., `noreply@pedantstudios.com`) |
-| `RESEND_AUDIENCE_ID` | Resend Audience ID for email signups |
-| `CONTACT_TO_EMAIL` | Where contact-form emails are delivered |
+| `RESEND_AUDIENCE_ID` | Resend Audience ID for the *general* email-signup list (homepage form) |
+| `RESEND_AUDIENCE_ID_WEBCENTER` | Resend Audience ID for the *WebCenter waitlist* (WebCenter page form). Falls back to `RESEND_AUDIENCE_ID` if unset. |
+| `CONTACT_TO_EMAIL` | Where contact-form emails and new-subscriber notifications are delivered |
 
 For local dev, copy `.env.example` to `.env.local` and fill in.
 
@@ -62,8 +63,8 @@ Auto-deploys to Vercel on every push to `main`. PRs get preview URLs.
 
 1. Verify `pedantstudios.com` in Resend → adds DNS records (SPF, DKIM, DMARC) at Cloudflare
 2. Create an API key
-3. Create an Audience for the email signup list
-4. Set the four environment variables in the Vercel project settings
+3. Create **two** Audiences — one for general Pedant Studios updates, one for the WebCenter waitlist
+4. Set the five environment variables in the Vercel project settings
 
 ## SEO
 
