@@ -1,0 +1,102 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Page-specific path used to build the canonical URL. Should start with "/". */
+  pathname?: string;
+  /** Optional path to a Twitter / OG card image (relative to /). */
+  ogImage?: string;
+  /** og:type — defaults to "website". Use "article" for blog-style content. */
+  ogType?: string;
+  /** Pass true to suppress noindex meta on staging / preview pages. */
+  noIndex?: boolean;
+  /** Optional additional JSON-LD blocks (already-stringified objects). */
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  pathname = Astro.url.pathname,
+  ogImage = '/og-default.png',
+  ogType = 'website',
+  noIndex = false,
+  jsonLd = [],
+} = Astro.props;
+
+const SITE = 'https://pedantstudios.com';
+const canonicalUrl = new URL(pathname, SITE).href;
+const ogImageUrl = new URL(ogImage, SITE).href;
+
+// Default Organization JSON-LD — appears on every page so search engines associate
+// the brand with the site consistently.
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Pedant Studios',
+  legalName: 'Pedant Studios LLC',
+  url: SITE,
+  description:
+    'Pedant Studios builds small, focused software for tax preparation, bookkeeping, and similar small-firm workflows.',
+  // logo: `${SITE}/logo.png`, // Add when logo lands
+};
+
+const allJsonLd = [organizationLd, ...jsonLd];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Pedant Studios" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Inter font (system fallback in CSS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- JSON-LD -->
+    {
+      allJsonLd.map((data) => (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(data)}
+        />
+      ))
+    }
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

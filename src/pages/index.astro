@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+
+const title = 'Pedant Studios — Software for small firms that get the details right';
+const description =
+  'Pedant Studios builds focused software for tax preparation, bookkeeping, and similar small-firm workflows. Currently shipping WebCenter, a time clock and workforce management app for tax-and-bookkeeping firms.';
+---
+
+<BaseLayout title={title} description={description} pathname="/">
+  <Header />
+
+  <main>
+    <!-- Hero -->
+    <section class="max-w-6xl mx-auto px-4 pt-16 md:pt-24 pb-16 md:pb-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-brand-700 dark:text-brand-400 uppercase tracking-wider">
+          Pedant Studios
+        </p>
+        <h1 class="mt-4 text-4xl md:text-6xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+          Software that gets the details right.
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-zinc-700 dark:text-zinc-300 leading-relaxed">
+          We build small, focused tools for tax preparation, bookkeeping, and similar
+          small-firm work — built carefully, by people who use them.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="/webcenter"
+            class="px-6 py-3 rounded-lg bg-brand-700 text-white font-semibold hover:bg-brand-800 no-underline transition-colors"
+          >
+            See WebCenter
+          </a>
+          <a
+            href="https://docs.pedantstudios.com"
+            class="px-6 py-3 rounded-lg border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 no-underline transition-colors"
+          >
+            Browse documentation
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="max-w-6xl mx-auto px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+      <p class="text-sm font-semibold text-brand-700 dark:text-brand-400 uppercase tracking-wider">
+        Products
+      </p>
+      <h2 class="mt-3 text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+        What we ship
+      </h2>
+
+      <div class="mt-10 grid md:grid-cols-2 gap-6">
+        <article class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-8 hover:border-brand-500 dark:hover:border-brand-400 transition-colors">
+          <div class="flex items-center gap-2">
+            <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">WebCenter</h3>
+            <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-amber-100 text-amber-900 dark:bg-amber-900/30 dark:text-amber-300">
+              Beta
+            </span>
+          </div>
+          <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300 italic">
+            Time clock & workforce management for tax preparation and bookkeeping firms
+          </p>
+          <p class="mt-4 text-zinc-700 dark:text-zinc-300">
+            Time tracking, scheduling, mileage, and payroll-ready reports — designed
+            for firms whose headcount swings 3× during tax season.
+          </p>
+          <a
+            href="/webcenter"
+            class="inline-block mt-6 text-brand-700 dark:text-brand-400 font-semibold hover:underline no-underline"
+          >
+            Learn more →
+          </a>
+        </article>
+
+        <article class="rounded-2xl border-2 border-dashed border-zinc-200 dark:border-zinc-800 p-8 flex items-center justify-center">
+          <div class="text-center">
+            <p class="text-sm font-semibold text-zinc-500 dark:text-zinc-500 uppercase tracking-wider">
+              More to come
+            </p>
+            <p class="mt-2 text-zinc-600 dark:text-zinc-400">
+              We add products carefully, not quickly.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- What we believe -->
+    <section class="max-w-6xl mx-auto px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+      <p class="text-sm font-semibold text-brand-700 dark:text-brand-400 uppercase tracking-wider">
+        Approach
+      </p>
+      <h2 class="mt-3 text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+        How we build
+      </h2>
+
+      <div class="mt-10 grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg">Small surface, real depth</h3>
+          <p class="mt-2 text-zinc-700 dark:text-zinc-300">
+            We'd rather ship one feature that works completely than ten that almost work.
+            Fewer settings to misconfigure, fewer edges to scrape against.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg">Honest about limits</h3>
+          <p class="mt-2 text-zinc-700 dark:text-zinc-300">
+            Documented non-goals matter as much as features. If we don't do something,
+            we say so. No vapor, no "coming soon" pages that never resolve.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg">Built to last</h3>
+          <p class="mt-2 text-zinc-700 dark:text-zinc-300">
+            We pick durable technology over trendy. CSV exports over fragile API
+            integrations. Static sites over server-render-everything. Boring choices
+            ship.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Email signup -->
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <EmailSignup
+        list="general"
+        heading="Get launch updates"
+        subheading="One short email when we ship something new. No spam, no marketing fluff, easy to unsubscribe."
+      />
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

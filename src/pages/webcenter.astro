@@ -1,0 +1,316 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+
+const title =
+  'WebCenter — Time clock & workforce management for tax preparation and bookkeeping firms';
+const description =
+  'WebCenter is a time clock, scheduling, mileage, and payroll-reporting application built for tax preparation and bookkeeping firms. Free for one location, paid plan unlocks multi-location and full history. 14-day trial, no credit card.';
+
+// SEO: SoftwareApplication structured data so search engines understand WebCenter
+// is a product with pricing, audience, and category.
+const softwareLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'WebCenter',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description:
+    'Time clock and workforce management for tax preparation and bookkeeping firms.',
+  url: 'https://pedantstudios.com/webcenter',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Pedant Studios',
+    url: 'https://pedantstudios.com',
+  },
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Free',
+      description: 'Unlimited employees, 1 location, 1 admin, 90 days of history.',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Paid',
+      description:
+        'Unlimited locations and admins, full history, scheduling and time-off, audit logs, priority support. Per-active-location with graduated volume discount.',
+      priceCurrency: 'USD',
+    },
+  ],
+};
+
+const features = [
+  {
+    title: 'Time clock that respects rounding rules',
+    body: 'Clock in and clock out with optional rounding to your firm\'s preferred interval. Per-office overrides for multi-location firms. Verification and override workflows for managers — all audited.',
+  },
+  {
+    title: 'Mileage tracking, simply',
+    body: 'Self-service mileage claims with per-mile reimbursement reports. CSV-ready for your payroll provider.',
+  },
+  {
+    title: 'Lightweight scheduling',
+    body: 'Week-grid scheduling for managers. Copy-week templating for repeat schedules. "My Schedule" for employees, with cross-firm conflict warnings if they work at multiple firms.',
+  },
+  {
+    title: 'Internal messaging',
+    body: 'Send announcements to individuals, offices, or role-based groups. Plus a Message of the Day shown at login for firm-wide notices.',
+  },
+  {
+    title: 'Payroll-ready reports',
+    body: 'Time worked, overtime, payroll, mileage, and employee-history reports. Every report exports to CSV pre-formatted for Gusto, QuickBooks, ADP, and similar.',
+  },
+  {
+    title: 'Multi-employer aware',
+    body: 'One employee account can be linked to multiple firms. Each firm sees only their own data — the privacy boundary is enforced at the database layer, never crossed in any report or export.',
+  },
+];
+
+const painPoints = [
+  {
+    pain: 'Headcount swings 3× during tax season.',
+    solution:
+      'Add seasonal staff with email invitations. Deactivate them in October without losing history.',
+  },
+  {
+    pain: 'Multi-location firms feel punished by per-location pricing.',
+    solution:
+      'Graduated volume discount once you have 3+ locations. Free plan covers single-location firms.',
+  },
+  {
+    pain: 'Native payroll integrations break every time the API changes.',
+    solution:
+      'CSV export, pre-formatted for the major payroll providers. Durable. No API treadmill.',
+  },
+  {
+    pain: 'Tax preparers often work at multiple firms during the season.',
+    solution:
+      'Linked accounts let employees use one login across firms. Firms never see each other.',
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pathname="/webcenter"
+  jsonLd={[softwareLd]}
+>
+  <Header />
+
+  <main>
+    <!-- Hero -->
+    <section class="max-w-6xl mx-auto px-4 pt-16 md:pt-24 pb-12">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-brand-700 dark:text-brand-400 uppercase tracking-wider">
+          WebCenter <span class="ml-2 px-2 py-0.5 text-xs rounded-full bg-amber-100 text-amber-900 dark:bg-amber-900/30 dark:text-amber-300">Beta</span>
+        </p>
+        <h1 class="mt-4 text-4xl md:text-6xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+          Time clock and workforce management built for tax-and-bookkeeping firms.
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-zinc-700 dark:text-zinc-300 leading-relaxed">
+          Designed for firms whose headcount triples during tax season — and shrinks
+          afterward. Time tracking, scheduling, mileage, and payroll-ready CSV
+          exports, without the maintenance overhead of payroll-API integrations.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="https://docs.pedantstudios.com/docs/webcenter/getting-started/sign-up"
+            class="px-6 py-3 rounded-lg bg-brand-700 text-white font-semibold hover:bg-brand-800 no-underline transition-colors"
+          >
+            Try WebCenter free
+          </a>
+          <a
+            href="https://docs.pedantstudios.com/docs/webcenter/overview"
+            class="px-6 py-3 rounded-lg border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 no-underline transition-colors"
+          >
+            Read the docs
+          </a>
+        </div>
+        <p class="mt-4 text-sm text-zinc-500 dark:text-zinc-500">
+          Free plan covers one location forever. 14-day trial, no credit card required.
+        </p>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section class="max-w-6xl mx-auto px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+      <h2 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+        Who WebCenter is for
+      </h2>
+      <p class="mt-4 text-lg text-zinc-700 dark:text-zinc-300 max-w-3xl">
+        WebCenter is built for the small firms that swing seasonally. If your team
+        ramps up in January and back down in May, off-the-shelf workforce management
+        tools are designed against your usage pattern. WebCenter isn't.
+      </p>
+
+      <ul class="mt-8 grid md:grid-cols-2 gap-3 text-zinc-700 dark:text-zinc-300">
+        <li class="flex gap-3"><span class="text-brand-700 dark:text-brand-400">✓</span> Independent tax preparation offices (CTEC, PTIN-based practices)</li>
+        <li class="flex gap-3"><span class="text-brand-700 dark:text-brand-400">✓</span> Tax-prep franchise locations (Liberty Tax, Jackson Hewitt, similar)</li>
+        <li class="flex gap-3"><span class="text-brand-700 dark:text-brand-400">✓</span> Enrolled Agent practices and tax resolution firms</li>
+        <li class="flex gap-3"><span class="text-brand-700 dark:text-brand-400">✓</span> Bookkeeping firms (often combined with tax practices)</li>
+        <li class="flex gap-3"><span class="text-brand-700 dark:text-brand-400">✓</span> Small CPA firms doing tax (1–5 CPAs plus support staff)</li>
+        <li class="flex gap-3"><span class="text-brand-700 dark:text-brand-400">✓</span> Single-office or multi-location, 1–50 employees</li>
+      </ul>
+    </section>
+
+    <!-- Pain points / problem-solution -->
+    <section class="max-w-6xl mx-auto px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+      <h2 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+        Built around the actual problems
+      </h2>
+      <div class="mt-10 grid md:grid-cols-2 gap-8">
+        {painPoints.map((p) => (
+          <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 bg-white dark:bg-zinc-950">
+            <p class="font-semibold text-zinc-900 dark:text-zinc-100">{p.pain}</p>
+            <p class="mt-3 text-zinc-700 dark:text-zinc-300">{p.solution}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="max-w-6xl mx-auto px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+      <h2 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+        Features
+      </h2>
+      <p class="mt-4 text-lg text-zinc-700 dark:text-zinc-300 max-w-3xl">
+        Designed to be useful out of the box, configurable when you need it.
+      </p>
+
+      <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {features.map((f) => (
+          <article class="rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 bg-white dark:bg-zinc-950">
+            <h3 class="font-bold text-zinc-900 dark:text-zinc-100">{f.title}</h3>
+            <p class="mt-3 text-zinc-700 dark:text-zinc-300 text-sm">{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="max-w-6xl mx-auto px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+      <h2 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+        Pricing
+      </h2>
+      <p class="mt-4 text-lg text-zinc-700 dark:text-zinc-300 max-w-3xl">
+        Free is genuinely free, forever, for single-location firms. Paid is per
+        active location with a graduated volume discount once you reach 3+ locations.
+      </p>
+
+      <div class="mt-10 grid md:grid-cols-2 gap-6">
+        <article class="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-8 bg-white dark:bg-zinc-950">
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Free</h3>
+          <p class="mt-2 text-3xl font-bold text-zinc-900 dark:text-zinc-100">$0<span class="text-base font-normal text-zinc-500">/forever</span></p>
+          <ul class="mt-6 space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> Unlimited employees</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> 1 active location</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> 1 administrator</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> 90 days of history</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> CSV exports for payroll</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> All core features (time clock, mileage, scheduling, messaging)</li>
+          </ul>
+        </article>
+
+        <article class="rounded-2xl border-2 border-brand-700 dark:border-brand-400 p-8 bg-white dark:bg-zinc-950 relative">
+          <div class="absolute -top-3 left-6 px-3 py-1 bg-brand-700 text-white text-xs font-semibold rounded-full">
+            Most firms with 2+ locations
+          </div>
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Paid</h3>
+          <p class="mt-2 text-3xl font-bold text-zinc-900 dark:text-zinc-100">Per location<span class="text-base font-normal text-zinc-500">, monthly</span></p>
+          <p class="mt-1 text-sm text-zinc-500">Graduated discount for 3+ locations. Pricing shown in-app.</p>
+          <ul class="mt-6 space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> Everything in Free</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> Unlimited active locations</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> Unlimited administrators</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> Full history (no 90-day cap)</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> Audit logs</li>
+            <li class="flex gap-2"><span class="text-brand-700 dark:text-brand-400">✓</span> Priority support</li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="mt-6 text-zinc-700 dark:text-zinc-300">
+        <strong>14-day trial available, no credit card required.</strong> Try every paid feature for two weeks.
+      </p>
+    </section>
+
+    <!-- What it doesn't do (trust signal) -->
+    <section class="max-w-6xl mx-auto px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+      <h2 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+        What WebCenter doesn't do
+      </h2>
+      <p class="mt-4 text-lg text-zinc-700 dark:text-zinc-300 max-w-3xl">
+        Honest non-goals matter as much as features. If you need any of these,
+        WebCenter isn't the right fit — and we'll tell you so before you pay.
+      </p>
+
+      <div class="mt-8 grid md:grid-cols-2 gap-4 text-zinc-700 dark:text-zinc-300">
+        <div class="flex gap-3 p-4 rounded-lg border border-zinc-200 dark:border-zinc-800">
+          <span class="text-zinc-400">×</span>
+          <div>
+            <strong>No native payroll API integrations.</strong> CSV export only — pre-formatted for Gusto, QuickBooks, ADP, and similar. Durable; no integration treadmill.
+          </div>
+        </div>
+        <div class="flex gap-3 p-4 rounded-lg border border-zinc-200 dark:border-zinc-800">
+          <span class="text-zinc-400">×</span>
+          <div>
+            <strong>No cross-employer overtime calculation.</strong> Under FLSA, OT is per-employer. WebCenter calculates within your firm only.
+          </div>
+        </div>
+        <div class="flex gap-3 p-4 rounded-lg border border-zinc-200 dark:border-zinc-800">
+          <span class="text-zinc-400">×</span>
+          <div>
+            <strong>No native mobile app yet.</strong> The web app works on phone and tablet today. A wrapped mobile app is planned.
+          </div>
+        </div>
+        <div class="flex gap-3 p-4 rounded-lg border border-zinc-200 dark:border-zinc-800">
+          <span class="text-zinc-400">×</span>
+          <div>
+            <strong>No tablet shared-PIN mode.</strong> WebCenter requires per-user accounts — best fit for offices where employees have email and personal devices.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <div class="rounded-2xl bg-gradient-to-br from-brand-700 to-brand-900 p-8 md:p-12 text-white">
+        <h2 class="text-3xl md:text-4xl font-bold">Try WebCenter free for one location</h2>
+        <p class="mt-4 text-lg text-brand-100 max-w-2xl">
+          Free plan, no credit card needed. Sign up in two minutes, invite your team, clock in.
+          14-day trial of paid features available when you're ready.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="https://docs.pedantstudios.com/docs/webcenter/getting-started/sign-up"
+            class="px-6 py-3 rounded-lg bg-white text-brand-900 font-semibold hover:bg-brand-50 no-underline transition-colors"
+          >
+            Try WebCenter free
+          </a>
+          <a
+            href="/contact"
+            class="px-6 py-3 rounded-lg border-2 border-white text-white font-semibold hover:bg-white/10 no-underline transition-colors"
+          >
+            Talk to us first
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Email signup specific to WebCenter waitlist -->
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <EmailSignup
+        list="webcenter"
+        heading="Get WebCenter launch updates"
+        subheading="One short email when WebCenter ships major features or moves out of beta. No spam."
+      />
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Page not found — Pedant Studios';
+const description = 'The page you were looking for could not be found.';
+---
+
+<BaseLayout title={title} description={description} pathname="/404" noIndex={true}>
+  <Header />
+
+  <main class="max-w-3xl mx-auto px-4 py-24 text-center">
+    <p class="text-sm font-semibold text-brand-700 dark:text-brand-400 uppercase tracking-wider">404</p>
+    <h1 class="mt-4 text-4xl md:text-5xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+      We couldn't find that page.
+    </h1>
+    <p class="mt-4 text-lg text-zinc-700 dark:text-zinc-300">
+      The link may be old or mistyped. Here are some places that almost certainly exist:
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a
+        href="/"
+        class="px-6 py-3 rounded-lg bg-brand-700 text-white font-semibold hover:bg-brand-800 no-underline transition-colors"
+      >
+        Go home
+      </a>
+      <a
+        href="/webcenter"
+        class="px-6 py-3 rounded-lg border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 no-underline transition-colors"
+      >
+        WebCenter
+      </a>
+      <a
+        href="https://docs.pedantstudios.com"
+        class="px-6 py-3 rounded-lg border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 no-underline transition-colors"
+      >
+        Documentation
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

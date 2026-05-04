@@ -1,0 +1,45 @@
+---
+const { pathname } = Astro.url;
+const isActive = (href: string) => pathname === href || (href !== '/' && pathname.startsWith(href));
+---
+
+<header class="border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur sticky top-0 z-10">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a
+      href="/"
+      class="font-bold text-lg tracking-tight text-zinc-900 dark:text-zinc-100 hover:text-zinc-700 dark:hover:text-zinc-300 no-underline"
+    >
+      Pedant Studios
+    </a>
+    <nav aria-label="Primary" class="flex items-center gap-6 text-sm">
+      <a
+        href="/webcenter"
+        class:list={[
+          'no-underline transition-colors',
+          isActive('/webcenter')
+            ? 'text-brand-700 dark:text-brand-400 font-medium'
+            : 'text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100',
+        ]}
+      >
+        WebCenter
+      </a>
+      <a
+        href="https://docs.pedantstudios.com"
+        class="no-underline text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100 transition-colors"
+      >
+        Docs
+      </a>
+      <a
+        href="/contact"
+        class:list={[
+          'no-underline transition-colors',
+          isActive('/contact')
+            ? 'text-brand-700 dark:text-brand-400 font-medium'
+            : 'text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100',
+        ]}
+      >
+        Contact
+      </a>
+    </nav>
+  </div>
+</header>

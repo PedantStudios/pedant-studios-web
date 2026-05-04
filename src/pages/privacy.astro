@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Privacy Policy — Pedant Studios';
+const description =
+  'How Pedant Studios collects, uses, and protects information across our products and websites.';
+
+const lastUpdated = '2026-05-04';
+---
+
+<BaseLayout title={title} description={description} pathname="/privacy">
+  <Header />
+
+  <main class="max-w-3xl mx-auto px-4 py-16 prose-content">
+    <h1 class="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+      Privacy Policy
+    </h1>
+    <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-500">Last updated: {lastUpdated}</p>
+
+    <div class="mt-8 rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/20 p-4 text-sm text-amber-900 dark:text-amber-200">
+      <strong>Placeholder.</strong> This is a stub privacy policy intended only as a structural placeholder while final legal copy is being written. It is <strong>not legal advice</strong> and should not be relied on as a binding policy. The final policy will be published here.
+    </div>
+
+    <section class="mt-10 space-y-6 text-zinc-700 dark:text-zinc-300 leading-relaxed">
+      <div>
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Who we are</h2>
+        <p class="mt-2">
+          "Pedant Studios" refers to Pedant Studios LLC, a US-based company that operates this website and products including WebCenter. You can reach us at <a href="/contact">our contact page</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">What this stub will cover</h2>
+        <p class="mt-2">The final privacy policy will address each of the following:</p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li>What personal data we collect, and why</li>
+          <li>How we use it (service operation, communication, legal compliance)</li>
+          <li>Where it lives (US-based hosting; specific subprocessors named)</li>
+          <li>How long we retain it</li>
+          <li>Cookies and analytics — what we use and why</li>
+          <li>Your rights (access, correction, deletion, portability) and how to exercise them</li>
+          <li>How we handle data breaches</li>
+          <li>How we update this policy</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Cross-firm privacy in WebCenter (relevant now)</h2>
+        <p class="mt-2">
+          One thing that's <em>not</em> changing in the final policy: in WebCenter, employees who work at multiple firms have their data isolated per firm. A firm never sees that an employee works at another firm — not in any report, export, or admin view. The boundary is enforced at the database layer.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Contact</h2>
+        <p class="mt-2">
+          Questions about this policy or data we hold about you: please <a href="/contact">contact us</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
