@@ -30,8 +30,12 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonError(400, 'Please enter a valid email address.');
   }
 
+  const list = (body.list ?? 'general').trim().slice(0, 64) || 'general';
+
   const apiKey = import.meta.env.RESEND_API_KEY;
   const audienceId = import.meta.env.RESEND_AUDIENCE_ID;
+  const fromEmail = import.meta.env.RESEND_FROM_EMAIL;
+  const notifyTo = import.meta.env.CONTACT_TO_EMAIL;
 
   if (!apiKey || !audienceId) {
     console.error('Subscribe: missing RESEND_API_KEY or RESEND_AUDIENCE_ID');
@@ -39,6 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const resend = new Resend(apiKey);
+  let alreadyExisted = false;
 
   try {
     const result = await resend.contacts.create({
@@ -48,20 +53,41 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     if (result.error) {
-      // Treat "already exists" as success — idempotent UX.
       const message = result.error.message?.toLowerCase() ?? '';
+      // Treat "already exists" as success — idempotent UX.
       if (message.includes('already exists') || message.includes('already in')) {
-        return jsonOk();
+        alreadyExisted = true;
+      } else {
+        console.error('Subscribe: Resend error', result.error);
+        return jsonError(500, 'Could not subscribe. Please try again later.');
       }
-      console.error('Subscribe: Resend error', result.error);
-      return jsonError(500, 'Could not subscribe. Please try again later.');
     }
-
-    return jsonOk();
   } catch (err) {
     console.error('Subscribe: unexpected error', err);
     return jsonError(500, 'Could not subscribe. Please try again later.');
   }
+
+  // Notify the operator about the new subscriber. Best-effort: a notification
+  // failure must not fail the subscribe (the user already added themselves to
+  // the list successfully).
+  if (!alreadyExisted && fromEmail && notifyTo) {
+    try {
+      await resend.emails.send({
+        from: fromEmail,
+        to: [notifyTo],
+        subject: `New email subscriber (${list}): ${email}`,
+        text:
+          `A new email subscribed to the "${list}" list.\n\n` +
+          `Email: ${email}\n` +
+          `List: ${list}\n` +
+          `Time: ${new Date().toISOString()}\n`,
+      });
+    } catch (err) {
+      console.error('Subscribe: notification send failed (non-fatal)', err);
+    }
+  }
+
+  return jsonOk();
 };
 
 function jsonOk() {
