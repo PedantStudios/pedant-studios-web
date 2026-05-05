@@ -16,20 +16,25 @@ interface SubscribePayload {
 }
 
 /**
- * Map a list name to the configured Resend Topic ID. Topics are Resend's
- * recipient-controlled subscription model: contacts opt in or opt out of each
- * topic independently, and Resend's unsubscribe page surfaces these to
- * recipients automatically. (Audiences are deprecated as of Resend SDK 6.x.)
+ * Build the topics array for a new contact. Both forms (homepage and
+ * WebCenter) opt the user into BOTH topics — General Pedant Studios updates
+ * AND WebCenter updates. Recipients can unsubscribe from either topic
+ * independently via the Resend-hosted preferences page on any email we send.
+ *
+ * The `list` parameter from the form is preserved only as metadata in the
+ * operator notification (so we can see which form a signup came from), not
+ * for routing.
  */
-function getTopicId(list: ListName): string | undefined {
+function buildTopics(): { id: string; subscription: 'opt_in' }[] {
   const env = import.meta.env;
-  switch (list) {
-    case 'webcenter':
-      return env.RESEND_TOPIC_ID_WEBCENTER;
-    case 'general':
-    default:
-      return env.RESEND_TOPIC_ID_GENERAL;
+  const topics: { id: string; subscription: 'opt_in' }[] = [];
+  if (env.RESEND_TOPIC_ID_GENERAL) {
+    topics.push({ id: env.RESEND_TOPIC_ID_GENERAL, subscription: 'opt_in' });
   }
+  if (env.RESEND_TOPIC_ID_WEBCENTER) {
+    topics.push({ id: env.RESEND_TOPIC_ID_WEBCENTER, subscription: 'opt_in' });
+  }
+  return topics;
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -56,17 +61,16 @@ export const POST: APIRoute = async ({ request }) => {
     : 'general';
 
   const apiKey = import.meta.env.RESEND_API_KEY;
-  const topicId = getTopicId(list);
+  const topics = buildTopics();
   const fromEmail = import.meta.env.RESEND_FROM_EMAIL;
   const notifyTo = import.meta.env.CONTACT_TO_EMAIL;
 
-  if (!apiKey || !topicId) {
-    console.error(`Subscribe: missing RESEND_API_KEY or topic for list "${list}"`);
+  if (!apiKey || topics.length === 0) {
+    console.error('Subscribe: missing RESEND_API_KEY or no Topic IDs configured');
     return jsonError(500, 'Email signup is temporarily unavailable.');
   }
 
   const resend = new Resend(apiKey);
-  const topics = [{ id: topicId, subscription: 'opt_in' as const }];
   let alreadyExisted = false;
 
   try {
@@ -109,11 +113,12 @@ export const POST: APIRoute = async ({ request }) => {
       await resend.emails.send({
         from: fromEmail,
         to: [notifyTo],
-        subject: `New email subscriber (${list}): ${email}`,
+        subject: `New email subscriber (${list} form): ${email}`,
         text:
-          `A new email subscribed to the "${list}" topic.\n\n` +
+          `A new email signed up via the "${list}" form.\n\n` +
           `Email: ${email}\n` +
-          `Topic: ${list}\n` +
+          `Source form: ${list}\n` +
+          `Topics opted-in: ${topics.length} (general + webcenter)\n` +
           `Time: ${new Date().toISOString()}\n`,
       });
     } catch (err) {
