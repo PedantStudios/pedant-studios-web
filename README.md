@@ -88,6 +88,10 @@ Auto-deploys to Vercel on every push to `main`. PRs get preview URLs.
 - Indigo placeholder palette (matches docs hub) — final visual identity TBD
 - Wordmark only; no logo image yet
 
+## Adding a new product
+
+When a new Pedant Studios product launches, see **[NEW-PRODUCT-CHECKLIST.md](./NEW-PRODUCT-CHECKLIST.md)** for the full set of changes — across the marketing site, privacy policy, email pipeline, docs hub, and operational setup.
+
 ## License
 
 Site code is MIT. Content (copy, branding) is © Pedant Studios LLC.
