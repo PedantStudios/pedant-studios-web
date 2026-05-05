@@ -64,8 +64,10 @@ Auto-deploys to Vercel on every push to `main`. PRs get preview URLs.
 1. Verify `pedantstudios.com` in Resend → adds DNS records (SPF, DKIM, DMARC) at Cloudflare
 2. Create an API key
 3. Create **two Topics** in the Resend dashboard:
-   - **Pedant Studios updates** — opt-in default, public visibility
-   - **WebCenter updates** — opt-in default, public visibility
+   - **Pedant Studios updates** — **Default subscription: Opt-out** • Visibility: Public
+   - **WebCenter updates** — **Default subscription: Opt-out** • Visibility: Public
+
+   **Critical:** the "Opt-out" default means *only contacts who explicitly opt in receive emails on that topic*. The "Opt-in" default in Resend means the opposite — all contacts auto-subscribe, which would defeat per-form routing. The default mode **cannot be changed after creation**, so delete and recreate if you set it wrong.
 
    Topics let recipients control which categories they're subscribed to. The Resend-hosted unsubscribe page surfaces both topics so recipients can opt out of one without losing the other.
 4. Copy each topic's ID from the dashboard
