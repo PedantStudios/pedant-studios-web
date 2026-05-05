@@ -5,58 +5,320 @@ import Footer from '../components/Footer.astro';
 
 const title = 'Privacy Policy — Pedant Studios';
 const description =
-  'How Pedant Studios collects, uses, and protects information across our products and websites.';
+  'How Pedant Studios collects, uses, and protects personal information across pedantstudios.com and our products including WebCenter.';
 
-const lastUpdated = '2026-05-04';
+const lastUpdated = '2026-05-05';
 ---
 
 <BaseLayout title={title} description={description} pathname="/privacy">
   <Header />
 
-  <main class="max-w-3xl mx-auto px-4 py-16 prose-content">
+  <main class="max-w-3xl mx-auto px-4 py-16">
     <h1 class="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
       Privacy Policy
     </h1>
     <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-500">Last updated: {lastUpdated}</p>
 
     <div class="mt-8 rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/20 p-4 text-sm text-amber-900 dark:text-amber-200">
-      <strong>Placeholder.</strong> This is a stub privacy policy intended only as a structural placeholder while final legal copy is being written. It is <strong>not legal advice</strong> and should not be relied on as a binding policy. The final policy will be published here.
+      <strong>Beta notice.</strong> Pedant Studios is an early-stage company and this policy reflects current practices in good faith. We update it as the business evolves; the "Last updated" date above tells you when the latest revision shipped. Material changes are described in the <a href="#changes" class="underline">Changes</a> section.
     </div>
 
-    <section class="mt-10 space-y-6 text-zinc-700 dark:text-zinc-300 leading-relaxed">
-      <div>
-        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Who we are</h2>
-        <p class="mt-2">
-          "Pedant Studios" refers to Pedant Studios LLC, a US-based company that operates this website and products including WebCenter. You can reach us at <a href="/contact">our contact page</a>.
-        </p>
-      </div>
+    <nav class="mt-10 rounded-lg border border-zinc-200 dark:border-zinc-800 p-4 text-sm">
+      <p class="font-semibold text-zinc-900 dark:text-zinc-100">Contents</p>
+      <ol class="mt-3 list-decimal pl-5 space-y-1 text-zinc-700 dark:text-zinc-300">
+        <li><a href="#who" class="underline">Who we are and what this covers</a></li>
+        <li><a href="#roles" class="underline">Our role with respect to your data</a></li>
+        <li><a href="#what" class="underline">What we collect, why, and how long</a></li>
+        <li><a href="#processors" class="underline">Service providers we use</a></li>
+        <li><a href="#cross-tenant" class="underline">Cross-firm privacy in WebCenter</a></li>
+        <li><a href="#marketing" class="underline">Marketing email</a></li>
+        <li><a href="#cookies" class="underline">Cookies and tracking</a></li>
+        <li><a href="#security" class="underline">Security</a></li>
+        <li><a href="#rights" class="underline">Your privacy rights</a></li>
+        <li><a href="#sale" class="underline">We do not sell or share your information</a></li>
+        <li><a href="#minors" class="underline">Children and minors</a></li>
+        <li><a href="#international" class="underline">Where this policy applies</a></li>
+        <li><a href="#breach" class="underline">Data security incidents</a></li>
+        <li><a href="#changes" class="underline">Changes to this policy</a></li>
+        <li><a href="#contact" class="underline">How to contact us</a></li>
+      </ol>
+    </nav>
 
-      <div>
-        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">What this stub will cover</h2>
-        <p class="mt-2">The final privacy policy will address each of the following:</p>
+    <section class="mt-10 space-y-10 text-zinc-700 dark:text-zinc-300 leading-relaxed">
+      <div id="who">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">1. Who we are and what this covers</h2>
+        <p class="mt-3">
+          "Pedant Studios" refers to <strong>Pedant Studios LLC</strong>, a US-based limited liability company. This policy describes how we handle personal information across:
+        </p>
         <ul class="mt-3 list-disc pl-6 space-y-1">
-          <li>What personal data we collect, and why</li>
-          <li>How we use it (service operation, communication, legal compliance)</li>
-          <li>Where it lives (US-based hosting; specific subprocessors named)</li>
-          <li>How long we retain it</li>
-          <li>Cookies and analytics — what we use and why</li>
-          <li>Your rights (access, correction, deletion, portability) and how to exercise them</li>
-          <li>How we handle data breaches</li>
-          <li>How we update this policy</li>
+          <li>Our marketing website at <strong>pedantstudios.com</strong></li>
+          <li>Our documentation site at <strong>docs.pedantstudios.com</strong></li>
+          <li>Our products, including <strong>WebCenter</strong> (a workforce management application for small firms)</li>
         </ul>
-      </div>
-
-      <div>
-        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Cross-firm privacy in WebCenter (relevant now)</h2>
-        <p class="mt-2">
-          One thing that's <em>not</em> changing in the final policy: in WebCenter, employees who work at multiple firms have their data isolated per firm. A firm never sees that an employee works at another firm — not in any report, export, or admin view. The boundary is enforced at the database layer.
+        <p class="mt-3">
+          By using any of these, you agree to this policy. If you don't agree, please don't use them.
         </p>
       </div>
 
-      <div>
-        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Contact</h2>
-        <p class="mt-2">
-          Questions about this policy or data we hold about you: please <a href="/contact">contact us</a>.
+      <div id="roles">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">2. Our role with respect to your data</h2>
+        <p class="mt-3">
+          Pedant Studios plays different roles depending on whose data is involved. Knowing which role applies tells you whom to direct privacy questions to.
+        </p>
+        <div class="mt-4 rounded-lg border border-zinc-200 dark:border-zinc-800 overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-zinc-50 dark:bg-zinc-900 text-left">
+              <tr>
+                <th class="p-3 font-semibold">If you are…</th>
+                <th class="p-3 font-semibold">Pedant Studios is…</th>
+                <th class="p-3 font-semibold">Direct privacy requests to…</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
+              <tr>
+                <td class="p-3">A visitor to our website or someone who contacts us through our forms</td>
+                <td class="p-3">The <strong>controller</strong> of your data (we decide what we collect and why)</td>
+                <td class="p-3">Pedant Studios — see <a href="#rights" class="underline">section 9</a></td>
+              </tr>
+              <tr>
+                <td class="p-3">An <strong>administrator at a customer firm</strong> who signs up for and configures WebCenter</td>
+                <td class="p-3">The <strong>controller</strong> of your account data (you're our direct customer)</td>
+                <td class="p-3">Pedant Studios — see <a href="#rights" class="underline">section 9</a></td>
+              </tr>
+              <tr>
+                <td class="p-3">An <strong>employee of a firm that uses WebCenter</strong> (you clock in, log mileage, etc., for that firm)</td>
+                <td class="p-3">A <strong>processor</strong> handling your data on behalf of your employer (the firm is the controller)</td>
+                <td class="p-3">Your employer (the firm) first; we'll redirect you if you contact us</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4">
+          The reason: when a firm uses WebCenter to manage its workforce, the firm decides what data it puts in, why, and what it does with it. Pedant Studios just runs the software. The firm is responsible for explaining its practices to its employees and for handling data subject requests from them. We help the firm fulfill those obligations under our contract with them.
+        </p>
+      </div>
+
+      <div id="what">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">3. What we collect, why, and how long</h2>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">From visitors to pedantstudios.com and docs.pedantstudios.com</h3>
+        <ul class="mt-3 list-disc pl-6 space-y-2">
+          <li>
+            <strong>Contact form submissions</strong> — name, email address, topic, and your message. We use this to respond to you. Retained as long as needed for the conversation, then archived in our email system per normal email retention.
+          </li>
+          <li>
+            <strong>Email signup addresses</strong> — your email if you submit a signup form, plus the topic you signed up for (general or WebCenter). We use this to send the announcements you signed up for. You can unsubscribe at any time using the link at the bottom of any email we send.
+          </li>
+          <li>
+            <strong>Standard web server logs</strong> — IP address, user agent, requested URL, and timestamp, kept by our hosting provider for routine operations and security. Retained for the period set by our hosting provider (typically 30 days).
+          </li>
+        </ul>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">From customer firms (and their administrators) using WebCenter</h3>
+        <ul class="mt-3 list-disc pl-6 space-y-2">
+          <li>
+            <strong>Account information</strong> — admin name, email, username, and a password hash (never the plaintext password) for sign-in.
+          </li>
+          <li>
+            <strong>Firm configuration</strong> — firm name, office locations, time zone, pay-period configuration, and other settings the admin enters.
+          </li>
+          <li>
+            <strong>Billing information</strong> — handled by Stripe; we receive a customer ID and subscription status, never the full card number.
+          </li>
+        </ul>
+        <p class="mt-3">Account and configuration data is retained for as long as the account is active and for a reasonable period after to allow account reactivation, then deleted on request or per our internal retention schedule.</p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">From employees whose data is stored in WebCenter (we are the processor)</h3>
+        <p class="mt-3">For employees of a customer firm, the data we hold on the firm's behalf typically includes:</p>
+        <ul class="mt-3 list-disc pl-6 space-y-2">
+          <li>Name, email, username, password hash, role and permissions assigned by the firm</li>
+          <li>Office and position assignments</li>
+          <li>Time clock entries (clock-in and clock-out times, with the office and position)</li>
+          <li>Mileage entries (date, miles, description, as the employee enters them)</li>
+          <li>Schedules the firm publishes for the employee</li>
+          <li>Internal messages the employee sends or receives within the firm</li>
+        </ul>
+        <p class="mt-3">
+          We don't intentionally collect special categories of data (race, religion, health, biometric data, geolocation by satellite, etc.). Employees should not enter such data into free-text fields.
+        </p>
+        <p class="mt-3">
+          Retention follows the firm's account lifecycle and any retention periods agreed with the firm. On the Free plan, time clock and mileage history older than 90 days is hidden from reports but is preserved in the database; full history is restored when the firm upgrades. When a firm closes its account, we follow our deletion process described in our customer agreement.
+        </p>
+      </div>
+
+      <div id="processors">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">4. Service providers we use</h2>
+        <p class="mt-3">We rely on a small number of US-based service providers to operate our products. Each is contractually bound to handle data only for the services we engage them for.</p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li><strong>Vercel, Inc.</strong> — hosting for our website, documentation, and product application; serverless functions</li>
+          <li><strong>Neon, Inc.</strong> — managed PostgreSQL database for the WebCenter application</li>
+          <li><strong>Resend</strong> — transactional and marketing email delivery</li>
+          <li><strong>Stripe, Inc.</strong> — payment processing for paid WebCenter subscriptions</li>
+        </ul>
+        <p class="mt-3">If we add or change a service provider in a way that affects how personal information is handled, we'll update this list and note the change in the <a href="#changes" class="underline">Changes</a> section.</p>
+      </div>
+
+      <div id="cross-tenant">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">5. Cross-firm privacy in WebCenter</h2>
+        <p class="mt-3">
+          WebCenter lets one employee account span multiple firms (helpful when, for example, a tax preparer works at two firms during the season). When an employee's account is linked across firms, we maintain a strict privacy boundary: <strong>each firm sees only its own data</strong>. A firm never sees that an employee works at another firm, and never sees data from another firm in any export, report, or admin view.
+        </p>
+        <p class="mt-3">
+          This boundary is enforced in the application's data layer. The only place WebCenter ever surfaces cross-firm information is in the employee's <em>own</em> "My Schedule" view, where we may show that the employee has overlapping shifts at different firms — that warning is for the employee to act on and is never shared with any firm.
+        </p>
+        <p class="mt-3">
+          Like any software system, this boundary depends on our software working as designed. We test it, design our database access pattern to fail closed, and treat any breach of the boundary as a data security incident (see <a href="#breach" class="underline">section 13</a>).
+        </p>
+      </div>
+
+      <div id="marketing">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">6. Marketing email</h2>
+        <p class="mt-3">
+          If you sign up for our email list, we'll send announcements related to the topic you signed up for (for example, the WebCenter waitlist sends WebCenter-specific announcements). Every email includes an unsubscribe link, and our email provider's preferences page lets you opt out of one topic without losing others. We'll honor unsubscribe requests promptly.
+        </p>
+        <p class="mt-3">
+          We don't sell or rent our email list to anyone, and we don't use it for behavioral advertising.
+        </p>
+      </div>
+
+      <div id="cookies">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">7. Cookies and tracking</h2>
+        <p class="mt-3">We use a minimal set of cookies, and only for things that need them:</p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li><strong>Session cookies</strong> in WebCenter, to keep you signed in. These are necessary for the application to function and expire when your session ends or after a period of inactivity.</li>
+          <li><strong>A signed tenant cookie</strong> in WebCenter, used to remember which firm you're currently working in if your account is linked to multiple firms.</li>
+        </ul>
+        <p class="mt-3">
+          We do not use third-party advertising cookies or analytics that track you across sites. We do not currently run a website analytics tool. If we add one, we'll choose a privacy-respecting option and update this policy.
+        </p>
+      </div>
+
+      <div id="security">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">8. Security</h2>
+        <p class="mt-3">We use industry-standard practices to protect personal information, including:</p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li>HTTPS for all web traffic to our sites and applications</li>
+          <li>Encryption of credentials and other sensitive data at rest, as provided by our database service</li>
+          <li>Hashed (never plaintext) passwords for all user accounts</li>
+          <li>Role-based access controls within WebCenter, with audit logs for sensitive actions</li>
+          <li>Limited access to production systems, granted only as needed</li>
+        </ul>
+        <p class="mt-3">
+          No system is fully secure. We can't guarantee that personal information will never be exposed by a determined attacker, a service-provider failure, or an unforeseen vulnerability. We commit to the practices above and to acting promptly if we learn of an incident — see <a href="#breach" class="underline">section 13</a>.
+        </p>
+      </div>
+
+      <div id="rights">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">9. Your privacy rights</h2>
+        <p class="mt-3">
+          Depending on the state where you live, you may have the following rights with respect to personal information about you that Pedant Studios holds <em>as a controller</em> (see <a href="#roles" class="underline">section 2</a>):
+        </p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li><strong>Right to know</strong> what personal information we have about you</li>
+          <li><strong>Right to access</strong> a copy of that information</li>
+          <li><strong>Right to correct</strong> inaccurate information</li>
+          <li><strong>Right to delete</strong> personal information we hold about you</li>
+          <li><strong>Right to portability</strong> — receive your data in a portable format</li>
+          <li><strong>Right to opt out</strong> of the sale or sharing of personal information for cross-context behavioral advertising (we don't do this — see <a href="#sale" class="underline">section 10</a>)</li>
+          <li><strong>Right to limit the use of sensitive personal information</strong> (we don't intentionally collect any)</li>
+          <li><strong>Right to non-discrimination</strong> — we won't deny services or change pricing because you exercised these rights</li>
+          <li><strong>Right to appeal</strong> a denial of a request, in states that provide it (Colorado, Connecticut, Virginia, and others)</li>
+        </ul>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">How to make a request</h3>
+        <p class="mt-3">
+          Send an email to <a href="mailto:privacy@pedantstudios.com" class="underline">privacy@pedantstudios.com</a> or use our <a href="/contact" class="underline">contact form</a>. Tell us:
+        </p>
+        <ol class="mt-3 list-decimal pl-6 space-y-1">
+          <li>What right you're exercising (access, deletion, correction, etc.)</li>
+          <li>Which Pedant Studios product or website it concerns</li>
+          <li>Enough information to find your data (the email address you used to contact us, sign up, or create an account)</li>
+        </ol>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Identity verification</h3>
+        <p class="mt-3">
+          We'll ask you to verify your identity before fulfilling a request — usually by confirming you have access to the email address on file or by other reasonable means proportionate to the sensitivity of the request. We do this to make sure we're not handing your data to someone else.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Response timeline</h3>
+        <p class="mt-3">
+          We'll acknowledge your request within 10 business days and respond substantively within <strong>45 days</strong>. If a request is genuinely complex (for example, it involves significant volume), we may extend this period by up to another 45 days and will tell you when we do so and why.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">If you're an employee whose data is in WebCenter at a customer firm</h3>
+        <p class="mt-3">
+          For data we hold <em>as a processor</em> on behalf of your employer (the customer firm), please direct your request to your employer first — they have direct access and the legal role to make decisions about your data. If you contact us, we'll redirect you and, if appropriate under our agreement with the firm, support the firm in fulfilling your request.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">When we may decline a request</h3>
+        <p class="mt-3">We may decline a request if:</p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li>We can't reasonably verify your identity</li>
+          <li>The request would require us to violate a legal obligation (for example, retaining records under tax or employment law)</li>
+          <li>The request is for data we hold only as a processor, in which case we'll direct you to the controller</li>
+          <li>The request is manifestly unfounded or excessive (such as repeated identical requests)</li>
+        </ul>
+        <p class="mt-3">
+          If we decline, we'll tell you why. In states that provide an appeal process (currently Colorado, Connecticut, Virginia, and a growing list of others), we'll explain how to appeal.
+        </p>
+      </div>
+
+      <div id="sale">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">10. We do not sell or share your information for advertising</h2>
+        <p class="mt-3">
+          Pedant Studios does <strong>not</strong> sell personal information, and we do <strong>not</strong> share it for cross-context behavioral advertising. We have not done so in the preceding 12 months. We have no plans to start; if that ever changes, we'll update this policy and provide a clear opt-out before any change takes effect.
+        </p>
+      </div>
+
+      <div id="minors">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">11. Children and minors</h2>
+        <p class="mt-3">
+          Pedant Studios products are designed for businesses and adults working at them. We do not knowingly collect personal information from children under 13. If you believe a child under 13 has provided us with personal information, please contact us at <a href="mailto:privacy@pedantstudios.com" class="underline">privacy@pedantstudios.com</a> and we'll delete it. Customer firms are responsible for not adding minors to their WebCenter accounts in violation of applicable child labor and privacy laws.
+        </p>
+      </div>
+
+      <div id="international">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">12. Where this policy applies</h2>
+        <p class="mt-3">
+          Pedant Studios is a US-based company, our service providers are US-based, and our products are designed and marketed for US-based businesses. We do not currently support customers in the European Union, the United Kingdom, or other regions with comprehensive cross-border data protection regimes that would require additional safeguards.
+        </p>
+        <p class="mt-3">
+          If you are located in such a region and choose to use our website or products, you do so on your own initiative and are responsible for compliance with local laws. We may decline to provide service in such cases.
+        </p>
+      </div>
+
+      <div id="breach">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">13. Data security incidents</h2>
+        <p class="mt-3">
+          If we determine that personal information has been compromised in a way that creates a meaningful risk of harm, we'll notify affected users and customer firms without unreasonable delay, and within the timelines required by applicable law. For data we hold as a processor for a customer firm, we'll notify the firm so they can fulfill their notification obligations to their employees.
+        </p>
+        <p class="mt-3">
+          We'll include the information required by applicable law (typically: what happened, when we became aware, what categories of information were involved, what we're doing about it, and what affected users can do).
+        </p>
+      </div>
+
+      <div id="changes">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">14. Changes to this policy</h2>
+        <p class="mt-3">
+          We update this policy from time to time as our products and practices evolve. The "Last updated" date at the top reflects the most recent change. For <strong>material</strong> changes (such as a new category of data we collect, or a new use of personal information), we'll provide additional notice — for example, an email to subscribed users or a notice on the website — at least 30 days before the change takes effect.
+        </p>
+        <p class="mt-3">
+          A non-binding revision history is maintained for reference; we don't yet publish it externally but can provide it on request.
+        </p>
+      </div>
+
+      <div id="contact">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">15. How to contact us</h2>
+        <p class="mt-3">
+          For privacy questions, requests under <a href="#rights" class="underline">section 9</a>, or anything else covered by this policy:
+        </p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li>Email: <a href="mailto:privacy@pedantstudios.com" class="underline">privacy@pedantstudios.com</a></li>
+          <li>Web form: <a href="/contact" class="underline">pedantstudios.com/contact</a></li>
+          <li>Mail: Pedant Studios LLC — postal address available on request via the channels above</li>
+        </ul>
+        <p class="mt-3 text-sm text-zinc-500 dark:text-zinc-500">
+          This policy is provided in good faith based on current practices and applicable US state privacy laws. It is not legal advice. If you have questions about how it applies to your specific situation, you may want to consult an attorney.
         </p>
       </div>
     </section>
