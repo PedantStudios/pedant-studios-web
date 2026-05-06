@@ -5,60 +5,389 @@ import Footer from '../components/Footer.astro';
 
 const title = 'Terms of Service — Pedant Studios';
 const description =
-  'Terms governing use of Pedant Studios products and websites, including WebCenter.';
+  'Terms governing use of Pedant Studios websites and products including WebCenter — what we provide, billing terms, acceptable use, and the legal framework for the relationship.';
 
-const lastUpdated = '2026-05-04';
+const lastUpdated = '2026-05-06';
 ---
 
 <BaseLayout title={title} description={description} pathname="/terms">
   <Header />
 
-  <main class="max-w-3xl mx-auto px-4 py-16 prose-content">
+  <main class="max-w-3xl mx-auto px-4 py-16">
     <h1 class="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
       Terms of Service
     </h1>
     <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-500">Last updated: {lastUpdated}</p>
 
     <div class="mt-8 rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/20 p-4 text-sm text-amber-900 dark:text-amber-200">
-      <strong>Placeholder.</strong> This is a stub terms of service intended only as a structural placeholder while final legal copy is being written. It is <strong>not legal advice</strong> and should not be relied on as a binding contract. The final terms will be published here.
+      <strong>Beta notice.</strong> Pedant Studios is an early-stage company and our products are in beta. These terms reflect our current practices and intent in good faith; specific provisions (notably warranties, service levels, and indemnification limits) will tighten when products move out of beta. The "Last updated" date above tells you when the latest revision shipped, and material changes are described in <a href="#changes" class="underline">section 14</a>.
     </div>
 
-    <section class="mt-10 space-y-6 text-zinc-700 dark:text-zinc-300 leading-relaxed">
-      <div>
-        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Provider</h2>
-        <p class="mt-2">
-          These terms are between you ("you" or "the firm") and Pedant Studios LLC ("Pedant Studios", "we", "us"). They cover use of pedantstudios.com, docs.pedantstudios.com, and our products including WebCenter.
-        </p>
-      </div>
+    <nav class="mt-10 rounded-lg border border-zinc-200 dark:border-zinc-800 p-4 text-sm">
+      <p class="font-semibold text-zinc-900 dark:text-zinc-100">Contents</p>
+      <ol class="mt-3 list-decimal pl-5 space-y-1 text-zinc-700 dark:text-zinc-300">
+        <li><a href="#definitions" class="underline">Definitions</a></li>
+        <li><a href="#acceptance" class="underline">Acceptance and who is bound</a></li>
+        <li><a href="#service" class="underline">The Service</a></li>
+        <li><a href="#account" class="underline">Account registration and security</a></li>
+        <li><a href="#billing" class="underline">Subscription, billing, and cancellation</a></li>
+        <li><a href="#data-ip" class="underline">Customer Data and intellectual property</a></li>
+        <li><a href="#aup" class="underline">Acceptable use</a></li>
+        <li><a href="#termination" class="underline">Suspension and termination</a></li>
+        <li><a href="#confidentiality" class="underline">Confidentiality</a></li>
+        <li><a href="#warranties" class="underline">Warranties and disclaimers</a></li>
+        <li><a href="#indemnification" class="underline">Indemnification</a></li>
+        <li><a href="#liability" class="underline">Limitation of liability</a></li>
+        <li><a href="#privacy" class="underline">Privacy</a></li>
+        <li><a href="#changes" class="underline">Term and changes to these terms</a></li>
+        <li><a href="#governing-law" class="underline">Governing law, venue, and disputes</a></li>
+        <li><a href="#general" class="underline">General provisions</a></li>
+      </ol>
+    </nav>
 
-      <div>
-        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">What this stub will cover</h2>
-        <p class="mt-2">The final terms will include:</p>
-        <ul class="mt-3 list-disc pl-6 space-y-1">
-          <li>Acceptable use — what you can and can't do with our products</li>
-          <li>Account and security — your responsibility for credentials and authorized users</li>
-          <li>Subscription and billing — payment, renewals, cancellation, refunds</li>
-          <li>Beta and trial features — disclaimers about pre-release software</li>
-          <li>Intellectual property — what's ours, what's yours, what's licensed</li>
-          <li>Service availability and uptime expectations</li>
-          <li>Data and privacy — how the privacy policy applies</li>
-          <li>Liability limits and warranty disclaimers</li>
-          <li>Termination — when and how either side can end the agreement</li>
-          <li>Governing law and dispute resolution</li>
+    <section class="mt-10 space-y-10 text-zinc-700 dark:text-zinc-300 leading-relaxed">
+      <div id="definitions">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">1. Definitions</h2>
+        <p class="mt-3">In these Terms:</p>
+        <ul class="mt-3 list-disc pl-6 space-y-2">
+          <li><strong>"Pedant Studios"</strong>, <strong>"we"</strong>, <strong>"us"</strong>, or <strong>"our"</strong> means Pedant Studios LLC.</li>
+          <li><strong>"Service"</strong> means our products and websites, including pedantstudios.com, docs.pedantstudios.com, and applications such as WebCenter.</li>
+          <li><strong>"Customer"</strong> means the individual or organization that signs up for an account and agrees to these Terms. For WebCenter, the Customer is typically the firm whose administrator creates the account.</li>
+          <li><strong>"Authorized Users"</strong> means individuals the Customer permits to use the Service through the Customer's account — for WebCenter, these are typically the firm's employees.</li>
+          <li><strong>"Customer Data"</strong> means information the Customer or its Authorized Users submit to or generate within the Service, including time clock entries, mileage records, schedules, and messages.</li>
+          <li><strong>"You"</strong> means the Customer or, where context requires, an Authorized User.</li>
         </ul>
       </div>
 
-      <div>
-        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Until the final terms are published</h2>
-        <p class="mt-2">
-          During beta, use of WebCenter is governed by these placeholder terms in spirit — use the product reasonably, don't try to attack or abuse it, and we'll make a good-faith effort to keep your data safe and the product working. If something goes wrong, contact us first; we resolve almost everything in conversation rather than escalation.
+      <div id="acceptance">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">2. Acceptance and who is bound</h2>
+        <p class="mt-3">
+          By creating an account, accessing the Service, or clicking "I agree" (or similar), you accept these Terms. If you do not accept them, do not use the Service.
+        </p>
+        <p class="mt-3">
+          <strong>If you are signing up on behalf of an organization (a firm using WebCenter, for example):</strong> you represent that you have the authority to bind that organization to these Terms, and "Customer" includes both you personally and the organization.
+        </p>
+        <p class="mt-3">
+          <strong>If you are an Authorized User of a Customer:</strong> the Customer is responsible to you for the Service under its agreement with you (typically your employment agreement or workplace policies), and these Terms govern the relationship between Pedant Studios and the Customer. By accessing the Service through a Customer's account, you also agree to comply with the <a href="#aup" class="underline">Acceptable Use</a> provisions in section 7 directly.
+        </p>
+        <p class="mt-3">
+          <strong>If you have linked your account to multiple Customers (multi-firm use in WebCenter):</strong> these Terms apply to your individual use of the Service. Your relationship with each Customer is governed by that Customer's own arrangements with you. Pedant Studios maintains a strict cross-Customer privacy boundary as described in our <a href="/privacy#cross-tenant" class="underline">Privacy Policy</a>.
         </p>
       </div>
 
-      <div>
-        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Contact</h2>
-        <p class="mt-2">
-          Questions about these terms: please <a href="/contact">contact us</a>.
+      <div id="service">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">3. The Service</h2>
+        <p class="mt-3">
+          We provide the Service as described on our websites and in the in-product documentation. We may update, modify, or improve the Service from time to time. While in beta, features may change, be added, or be removed without prior notice; we will endeavor to give reasonable notice of significant changes that would materially affect a Customer's use of the Service.
+        </p>
+        <p class="mt-3">
+          <strong>Beta status.</strong> Some or all features of the Service are currently in beta. Beta features are provided "AS IS" for evaluation, may have bugs, may be modified or discontinued, and are not subject to the warranties or service-level commitments that may apply to generally available offerings.
+        </p>
+        <p class="mt-3">
+          <strong>What we do not commit to.</strong> Unless explicitly stated in a separate written agreement, we do not commit to:
+        </p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li>Specific uptime percentages or service-level agreements</li>
+          <li>Native API integrations with any third-party service (WebCenter exports CSV; we do not promise direct integrations with payroll providers, accounting systems, or similar)</li>
+          <li>Compatibility with any particular browser, operating system, or device beyond what we publicly support</li>
+          <li>Continued availability of any specific feature</li>
+        </ul>
+      </div>
+
+      <div id="account">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">4. Account registration and security</h2>
+        <p class="mt-3">
+          To use the Service, you'll create an account. You agree to:
+        </p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li>Provide accurate, current, and complete information at signup, and keep it updated</li>
+          <li>Keep your credentials confidential</li>
+          <li>Be responsible for activity that occurs under your account, whether or not you authorized it</li>
+          <li>Notify us promptly if you become aware of unauthorized access to your account</li>
+        </ul>
+        <p class="mt-3">
+          For WebCenter Customers: you are responsible for managing Authorized Users — adding, removing, and setting their permissions — and for the actions Authorized Users take in your account.
+        </p>
+      </div>
+
+      <div id="billing">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">5. Subscription, billing, and cancellation</h2>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Plans</h3>
+        <p class="mt-3">
+          The Service is offered in plan tiers as described on our website and in-product. WebCenter currently offers a Free plan, a paid plan billed per active location with a graduated discount for three or more locations, and a 14-day trial of paid features. Specific pricing is shown at signup and on the in-app billing page.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Trial</h3>
+        <p class="mt-3">
+          A trial is available once per Customer account and is intended for evaluation. At the end of the trial, the account reverts to the Free plan unless the Customer chooses to upgrade to a paid plan. We do not automatically charge any payment method as a result of trial expiration.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Recurring billing</h3>
+        <p class="mt-3">
+          Paid plans are billed monthly by default through our payment processor (Stripe). By starting a paid plan you authorize us to charge the payment method you provide for the recurring fees, on the schedule shown at checkout, until you cancel. Your subscription will automatically renew at the end of each billing cycle at the then-current rate unless cancelled in advance.
+        </p>
+        <p class="mt-3">
+          You can cancel at any time from <strong>Admin → Billing → Manage Subscription</strong> in WebCenter, which opens the Stripe Customer Portal. Cancellation takes effect at the end of the current paid billing period; you'll keep paid features until then.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Past-due grace period</h3>
+        <p class="mt-3">
+          If a payment fails, your account enters a "past due" state. You'll have a grace period of 7 days during which the Service remains available, with a banner prompting you to update your payment method. After the grace period, write actions in the Service may be suspended until the payment is current. We do not delete data during this grace period.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Refunds</h3>
+        <p class="mt-3">
+          Subscription fees are non-refundable except where required by applicable law. We do not pro-rate refunds for partial months. If you cancel mid-billing-period, you keep paid features until the end of that period and are not charged again.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Taxes</h3>
+        <p class="mt-3">
+          Fees are exclusive of taxes unless otherwise stated. You are responsible for any sales, use, value-added, or similar taxes assessed on the Service in your jurisdiction.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Pricing changes</h3>
+        <p class="mt-3">
+          We may change prices for paid plans. We'll provide reasonable advance notice (typically at least 30 days) before any price increase takes effect for an existing Customer; price increases apply at the next billing cycle on or after the effective date of the change.
+        </p>
+      </div>
+
+      <div id="data-ip">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">6. Customer Data and intellectual property</h2>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Customer Data</h3>
+        <p class="mt-3">
+          As between Pedant Studios and the Customer, the Customer owns its Customer Data. The Customer grants Pedant Studios a non-exclusive, worldwide, royalty-free license to use, host, copy, transmit, and display Customer Data solely as necessary to provide and improve the Service for the Customer, to support the Customer, and to comply with applicable law. This license ends when the relevant Customer Data is deleted in accordance with these Terms and our Privacy Policy.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Our intellectual property</h3>
+        <p class="mt-3">
+          The Service — including the software, design, content we create, trademarks, and documentation — is owned by Pedant Studios or our licensors and is protected by intellectual property laws. We grant the Customer a limited, non-exclusive, non-transferable, revocable license to access and use the Service during the term, solely for the Customer's internal business purposes and in accordance with these Terms. Nothing in these Terms transfers ownership of any of our intellectual property to the Customer.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Aggregated and de-identified data</h3>
+        <p class="mt-3">
+          We may use aggregated, de-identified information derived from Customer Data — information that cannot reasonably be used to identify the Customer or any individual — for purposes such as service improvement, analytics about feature usage, and benchmarking. We do not sell this data and do not use it for advertising.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Feedback</h3>
+        <p class="mt-3">
+          If you provide us with suggestions, ideas, or feedback about the Service, you grant us a perpetual, irrevocable, royalty-free license to use that feedback to improve the Service, without any obligation to attribute or compensate you. You're not required to provide feedback, and your feedback won't include any of your confidential information unless you specifically choose to share it for that purpose.
+        </p>
+      </div>
+
+      <div id="aup">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">7. Acceptable use</h2>
+        <p class="mt-3">
+          You agree not to use the Service to:
+        </p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li>Violate any applicable law, regulation, or third-party right (including labor, employment, tax, and privacy laws)</li>
+          <li>Infringe or misappropriate intellectual property rights</li>
+          <li>Submit Customer Data you do not have the right to submit, or that contains malware, viruses, or other harmful code</li>
+          <li>Attempt to reverse-engineer, decompile, or disassemble the Service except to the extent permitted by applicable law</li>
+          <li>Probe, scan, or test the vulnerability of the Service except through a coordinated security disclosure</li>
+          <li>Attempt to gain access to data, accounts, or systems you are not authorized to access (including any attempt to bypass the cross-tenant privacy boundary in WebCenter)</li>
+          <li>Use the Service to send spam, harass others, or in a manner intended to harm employees or other Authorized Users</li>
+          <li>Use the Service in connection with high-risk activities where failure of the Service could result in personal injury or significant property damage</li>
+          <li>Resell, sublicense, or rent the Service to third parties without our written permission</li>
+          <li>Interfere with or disrupt the Service, including by overwhelming it with traffic or scraping it at scale</li>
+        </ul>
+        <p class="mt-3">
+          We may investigate suspected violations and take action — including suspending or terminating accounts — as described in <a href="#termination" class="underline">section 8</a>.
+        </p>
+      </div>
+
+      <div id="termination">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">8. Suspension and termination</h2>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">By the Customer</h3>
+        <p class="mt-3">
+          The Customer may terminate the Service at any time by cancelling the subscription (for paid plans) and ceasing use of the Service. Termination of a paid plan takes effect at the end of the current billing period unless otherwise required by law.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">By Pedant Studios</h3>
+        <p class="mt-3">
+          We may suspend or terminate the Customer's access to the Service:
+        </p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li><strong>For cause</strong> — if the Customer materially breaches these Terms (including the Acceptable Use section), or if continued provision of the Service to the Customer creates legal, security, or operational risk to us, our other customers, or third parties. We will provide reasonable notice and an opportunity to cure where practical.</li>
+          <li><strong>For non-payment</strong> — after the past-due grace period described in <a href="#billing" class="underline">section 5</a>, write access may be suspended; sustained non-payment may result in termination.</li>
+          <li><strong>For convenience</strong> — by giving the Customer at least 30 days' written notice. If we terminate a paid Customer for convenience mid-billing-period, we'll refund the prorated portion of pre-paid fees for the unused remainder of the period.</li>
+        </ul>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Effect of termination</h3>
+        <p class="mt-3">
+          On termination of an account:
+        </p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li>Access to the Service ends.</li>
+          <li>For at least 30 days after termination, the Customer may request export of Customer Data via the contact form. We'll provide a reasonable export in CSV or similar standard format.</li>
+          <li>After the export window, Customer Data will be deleted in accordance with our Privacy Policy and any retention obligations under applicable law (such as records required for tax or legal compliance).</li>
+          <li>Sections of these Terms that by their nature should survive termination (including <a href="#liability" class="underline">limitation of liability</a>, <a href="#indemnification" class="underline">indemnification</a>, <a href="#confidentiality" class="underline">confidentiality</a>, <a href="#governing-law" class="underline">governing law</a>, and accrued payment obligations) will survive.</li>
+        </ul>
+      </div>
+
+      <div id="confidentiality">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">9. Confidentiality</h2>
+        <p class="mt-3">
+          Each party may receive non-public information from the other party that is confidential ("Confidential Information"). Confidential Information includes Customer Data and the Service's non-public technical details. Each party agrees to:
+        </p>
+        <ul class="mt-3 list-disc pl-6 space-y-1">
+          <li>Use Confidential Information only as needed to perform under these Terms</li>
+          <li>Protect Confidential Information using at least the same care it uses to protect its own confidential information of similar importance, and no less than reasonable care</li>
+          <li>Not disclose Confidential Information to third parties except to its personnel and contractors with a need to know who are bound by similar confidentiality obligations</li>
+        </ul>
+        <p class="mt-3">
+          These obligations don't apply to information that is or becomes public through no breach of these Terms, was lawfully known to the receiving party before disclosure, is independently developed, or is rightfully obtained from a third party. Disclosure required by law is permitted with prompt notice to the other party where lawful.
+        </p>
+      </div>
+
+      <div id="warranties">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">10. Warranties and disclaimers</h2>
+        <p class="mt-3">
+          We will provide the Service in a workmanlike manner consistent with industry standards for similar offerings.
+        </p>
+        <p class="mt-3 font-semibold text-zinc-900 dark:text-zinc-100">
+          OTHER THAN AS EXPRESSLY SET OUT IN THIS SECTION, AND TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE." WE DISCLAIM ALL OTHER WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, AND ANY WARRANTIES ARISING FROM COURSE OF DEALING OR USAGE OF TRADE.
+        </p>
+        <p class="mt-3">
+          We do not warrant that the Service will be uninterrupted or error-free, that defects will be corrected, that the Service is free of viruses or other harmful components, or that the Service will meet your specific requirements. Beta features are provided without any warranties whatsoever.
+        </p>
+      </div>
+
+      <div id="indemnification">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">11. Indemnification</h2>
+        <p class="mt-3">
+          <strong>By the Customer.</strong> The Customer agrees to defend, indemnify, and hold harmless Pedant Studios, its officers, employees, and contractors from and against any third-party claims, damages, costs, and expenses (including reasonable attorneys' fees) arising from or related to: (a) Customer Data or the Customer's or its Authorized Users' use of the Service in violation of these Terms or applicable law, (b) the Customer's violation of any third-party right, including intellectual property or privacy rights, (c) employment-related claims by the Customer's employees or former employees, except to the extent caused by Pedant Studios's gross negligence or willful misconduct.
+        </p>
+        <p class="mt-3">
+          <strong>By Pedant Studios.</strong> We agree to defend, indemnify, and hold harmless the Customer from and against third-party claims that the Service, as provided by us and used in accordance with these Terms, infringes a valid US patent, copyright, or trademark. Our obligation does not apply to claims arising from: (a) Customer Data, (b) modifications to the Service not made by us, (c) use of the Service in combination with products or services not provided by us, where the claim would not have arisen but for that combination, or (d) use of the Service after we have advised the Customer to discontinue use due to a potential infringement claim.
+        </p>
+        <p class="mt-3">
+          <strong>Procedure.</strong> The party seeking indemnification will: (a) promptly notify the indemnifying party of the claim, (b) allow the indemnifying party to control the defense and settlement of the claim (provided that no settlement requiring an admission of liability or material payment by the indemnified party may be made without that party's consent), and (c) provide reasonable cooperation in the defense.
+        </p>
+        <p class="mt-3">
+          The indemnification obligations in this section are subject to the <a href="#liability" class="underline">limitation of liability</a> in section 12.
+        </p>
+      </div>
+
+      <div id="liability">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">12. Limitation of liability</h2>
+        <p class="mt-3 font-semibold text-zinc-900 dark:text-zinc-100">
+          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW:
+        </p>
+        <p class="mt-3">
+          <strong>(a) No indirect damages.</strong> Neither party will be liable to the other for indirect, incidental, consequential, special, exemplary, or punitive damages, including lost profits, lost revenue, lost data, or business interruption, even if advised of the possibility of such damages.
+        </p>
+        <p class="mt-3">
+          <strong>(b) Cap on direct damages.</strong> Each party's total cumulative liability arising out of or related to these Terms or the Service — whether in contract, tort (including negligence), strict liability, or otherwise — will not exceed the greater of (i) the total fees paid or payable by the Customer to Pedant Studios in the twelve (12) months immediately preceding the event giving rise to the claim, or (ii) one hundred dollars ($100).
+        </p>
+        <p class="mt-3">
+          <strong>(c) Exclusions from the cap.</strong> The cap and exclusions in this section do not apply to: a party's indemnification obligations; the Customer's obligation to pay fees; either party's gross negligence, willful misconduct, or fraud; or any liability that cannot be limited under applicable law.
+        </p>
+        <p class="mt-3">
+          <strong>(d) Free plan acknowledgment.</strong> The Customer acknowledges that we provide the Free plan at no charge, in part in reliance on the limitations of liability in this section. The $100 floor in subsection (b) is intended as a meaningful, if minimum, allocation of risk for Customers who have paid no fees.
+        </p>
+        <p class="mt-3">
+          <strong>(e) Basis of the bargain.</strong> The parties agree that these limitations are an essential basis of the bargain between them and would not enter into these Terms without them.
+        </p>
+      </div>
+
+      <div id="privacy">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">13. Privacy</h2>
+        <p class="mt-3">
+          Our handling of personal information is governed by our <a href="/privacy" class="underline">Privacy Policy</a>, which is incorporated by reference into these Terms. For Customer Data that is personal information processed on behalf of a Customer (for example, employee data in WebCenter), Pedant Studios acts as a processor and the Customer acts as the controller, as further described in the Privacy Policy.
+        </p>
+      </div>
+
+      <div id="changes">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">14. Term and changes to these terms</h2>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Term</h3>
+        <p class="mt-3">
+          These Terms apply from the time you first access the Service and continue until terminated as described in <a href="#termination" class="underline">section 8</a>. For paid plans, the term renews automatically at the end of each billing cycle until cancelled.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Changes</h3>
+        <p class="mt-3">
+          We may update these Terms from time to time. The "Last updated" date at the top reflects the most recent revision. For <strong>material</strong> changes — for example, changes to billing, the limitation of liability, or the dispute-resolution section — we'll provide at least 30 days' advance notice by email to the Customer's account contact and by a notice on the website. Non-material changes (clarifications, formatting, fixes to broken links) take effect when posted.
+        </p>
+        <p class="mt-3">
+          By continuing to use the Service after the effective date of a change, you accept the updated Terms. If you do not accept the updated Terms, you must stop using the Service before the effective date.
+        </p>
+      </div>
+
+      <div id="governing-law">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">15. Governing law, venue, and disputes</h2>
+        <p class="mt-3">
+          These Terms are governed by the laws of the State of <strong>[State of formation — to be confirmed]</strong>, without regard to conflict-of-laws principles. The United Nations Convention on Contracts for the International Sale of Goods does not apply.
+        </p>
+        <p class="mt-3">
+          Any dispute arising out of or relating to these Terms or the Service that cannot be resolved through good-faith discussion between the parties will be brought exclusively in the state or federal courts located in <strong>[County, State — to be confirmed]</strong>, and each party consents to the personal jurisdiction of those courts.
+        </p>
+        <p class="mt-3">
+          Each party waives any right to a jury trial. To the extent permitted by law, claims must be brought within one year after the cause of action arose, or be permanently barred.
+        </p>
+        <p class="mt-3 text-sm text-zinc-500 dark:text-zinc-500">
+          Note: We have not included a binding arbitration clause or class-action waiver in these beta-stage Terms. We may add one at general availability with appropriate notice.
+        </p>
+      </div>
+
+      <div id="general">
+        <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">16. General provisions</h2>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Entire agreement</h3>
+        <p class="mt-3">
+          These Terms, together with our Privacy Policy and any plan-specific or product-specific terms referenced from them, are the entire agreement between Pedant Studios and the Customer about the Service, and supersede any prior agreements.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Severability</h3>
+        <p class="mt-3">
+          If any provision of these Terms is held to be unenforceable, the remaining provisions remain in effect, and the unenforceable provision will be modified to the minimum extent necessary to be enforceable while preserving the parties' original intent.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">No waiver</h3>
+        <p class="mt-3">
+          Our failure to enforce any provision is not a waiver of our right to enforce it later.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Assignment</h3>
+        <p class="mt-3">
+          The Customer may not assign these Terms or delegate its obligations without our prior written consent (except to a successor in a merger, acquisition, or sale of all or substantially all of the Customer's business or assets, with notice to us). We may assign these Terms in connection with a merger, acquisition, or sale of all or substantially all of our business or assets.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Force majeure</h3>
+        <p class="mt-3">
+          Neither party is liable for delay or failure to perform (other than payment obligations) caused by events beyond its reasonable control, including natural disasters, pandemics, acts of war or terrorism, government actions, large-scale failures of the internet or third-party infrastructure, or labor disputes. The affected party will use commercially reasonable efforts to mitigate and resume performance.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Notices</h3>
+        <p class="mt-3">
+          We give notices to Customers by email to the account contact, by posting on the website, or in-product. Customers give notices to us through the <a href="/contact" class="underline">contact form</a> on pedantstudios.com.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">No third-party beneficiaries</h3>
+        <p class="mt-3">
+          These Terms do not create any third-party beneficiary rights. In particular, Authorized Users are not third-party beneficiaries of the agreement between Pedant Studios and the Customer; their rights are governed by their relationship with the Customer.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Export control</h3>
+        <p class="mt-3">
+          You agree to comply with all applicable export and import laws of the United States, and you represent that you are not located in, or a resident of, a country or territory subject to comprehensive US sanctions, and are not on any US government restricted-party list.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Relationship</h3>
+        <p class="mt-3">
+          The parties are independent contractors. These Terms do not create any partnership, joint venture, employment, or agency relationship.
+        </p>
+
+        <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">Contact</h3>
+        <p class="mt-3">
+          Questions about these Terms: <a href="/contact" class="underline">contact us</a>. Pedant Studios LLC, postal address available on request via the contact form.
+        </p>
+        <p class="mt-3 text-sm text-zinc-500 dark:text-zinc-500">
+          These Terms are provided in good faith for use during our beta period. They are not legal advice. If you have questions about how they apply to your specific situation, you may want to consult an attorney.
         </p>
       </div>
     </section>

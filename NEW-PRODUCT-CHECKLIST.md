@@ -90,11 +90,62 @@ If you added a section, update the contents `<ol>` near the top accordingly.
 
 ---
 
-## Terms of Service updates
+## Terms of Service — surgical edits
 
-> Currently a placeholder pending a real ToS draft. When the ToS exists, this section will list the parallel surgical edits.
+The ToS at `src/pages/terms.astro` is structured to cover all current and future Pedant Studios products without rewrites. Most of the document (definitions, billing, IP, AUP, liability, disputes, general provisions) applies firm-wide. A few sections need product-specific edits when adding a new product:
 
-For now: any new product launching at GA (not beta) needs the ToS reviewed and updated by counsel before launch.
+### 1. Section 1 (Definitions)
+
+If the new product has a different audience model (e.g., B2C consumer product where the user IS the Customer rather than a firm acting on behalf of employees), update the **"Customer"** and **"Authorized Users"** definitions to be inclusive of that pattern.
+
+### 2. Section 2 (Acceptance — who is bound)
+
+If the new product is B2C (no organization signing on behalf of others), the second paragraph about organizations doesn't apply but is still useful as-is. Add a paragraph covering the new product if its acceptance flow differs.
+
+### 3. Section 3 (The Service — what we don't commit to)
+
+If the new product has different non-commitments (e.g., a calendar app might explicitly not commit to syncing with specific external calendar providers), add or generalize the bullet list.
+
+### 4. Section 5 (Subscription, billing, and cancellation)
+
+Update the **Plans** subsection if the new product has a different pricing model (e.g., per-user instead of per-location, or one-time purchase instead of subscription).
+
+### 5. Section 7 (Acceptable use)
+
+Add product-specific prohibitions if the new product has them. The "bypass cross-tenant privacy boundary in WebCenter" bullet is WebCenter-specific; for a new product with different security architecture, add a parallel bullet or replace it.
+
+### 6. Section 8 (Termination — Effect of termination)
+
+Update the data export bullet if the new product's export format differs from CSV.
+
+### Sections that rarely need product-specific updates
+
+- Section 4 (Account registration) — applies firm-wide
+- Section 6 (Customer Data and IP) — generic framing applies firm-wide
+- Section 9 (Confidentiality) — applies firm-wide
+- Section 10 (Warranties / disclaimers) — applies firm-wide; note the beta-AS-IS language is product-agnostic
+- Section 11 (Indemnification) — applies firm-wide
+- Section 12 (Limitation of liability) — applies firm-wide; the cap structure scales across products
+- Section 13 (Privacy) — references the privacy policy, which is updated separately per the steps above
+- Section 14 (Term and changes) — material-change notice process is firm-wide
+- Section 15 (Governing law, venue, disputes) — firm-wide
+- Section 16 (General provisions) — firm-wide
+
+### Update the "Last updated" date
+
+Bump `lastUpdated` in `terms.astro` to today and call out the change in the 30-day advance notice email to existing customers (a new product launch is a material change).
+
+### When to involve outside counsel
+
+Before going GA (not beta) on the platform — or before launching any product with a substantially different commercial structure — these specific items in the ToS deserve attorney review:
+
+- Final limitation-of-liability cap structure (especially the Free-tier $100 floor)
+- Indemnification scope and how it interacts with the cap
+- Auto-renewal disclosure language (CA Auto-Renewal Law, FTC Click-to-Cancel)
+- Whether to add an arbitration / class-waiver clause
+- Final governing-law and venue selection
+
+The current ToS is appropriate for the beta period.
 
 ---
 
