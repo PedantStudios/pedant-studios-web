@@ -102,6 +102,14 @@ If the new product has a different audience model (e.g., B2C consumer product wh
 
 If the new product is B2C (no organization signing on behalf of others), the second paragraph about organizations doesn't apply but is still useful as-is. Add a paragraph covering the new product if its acceptance flow differs.
 
+**Click-through requirement.** Every product must implement an explicit ToS acceptance click-through for individual users (not just the organization signup):
+
+- **For self-signup users** (firm admins, B2C users): include "By clicking [Sign Up], you agree to the [Terms of Service](link) and [Privacy Policy](link)" above the signup button. The click is the acceptance.
+- **For Authorized Users joining via invitation:** on first sign-in, show a brief modal: "Please review our [Terms of Service](link) and [Privacy Policy](link). By clicking 'I agree and continue', you accept these terms with respect to your individual use of the Service." Single button. Record acceptance with user ID, timestamp, and ToS version.
+- **For ToS material updates:** on next sign-in after a material change, show a re-acceptance prompt with a link to the changes.
+
+This is the lowest-friction click-through pattern that's legally defensible — see ToS §2 ("we will ask you to indicate acceptance"). The implementation lives in each product's auth/onboarding code; this checklist just flags that it's required.
+
 ### 3. Section 3 (The Service — what we don't commit to)
 
 If the new product has different non-commitments (e.g., a calendar app might explicitly not commit to syncing with specific external calendar providers), add or generalize the bullet list.
