@@ -261,12 +261,157 @@ The current ToS is appropriate for the beta period.
 
 ---
 
+## Subscription billing & auto-renewal compliance
+
+If the new product has paid plans (subscriptions, trials, etc.), it inherits commitments made in the ToS that must be operationalized in the product itself. This section captures those commitments and the patterns to satisfy them.
+
+US auto-renewal compliance is a patchwork of CARLA (California), ROSCA (federal), the FTC's Click-to-Cancel rule (status in flux), and state laws in NY, IL, FL, OR, CT, CO, and others. Most have similar requirements; CARLA is the strictest, so satisfying CARLA generally satisfies the others.
+
+### Operational commitments — every paid product must do all of these
+
+Each is something the ToS commits to. If the product can't deliver, the ToS is misleading.
+
+- [ ] **Free trial does NOT auto-convert to paid.** No surprise charge after a trial expires; user must actively upgrade. (WebCenter pattern: trial expires → reverts to Free plan.)
+- [ ] **Auto-renewal disclosure displayed at checkout** in visual proximity to the price and the consent action (the Subscribe / Sign up button).
+- [ ] **Affirmative consent captured** — the user clicks an unambiguous action button, not pre-checked.
+- [ ] **Confirmation email sent** after every paid plan start. Stripe sends this by default; verify the template includes recurring charge details, frequency, and a cancellation link.
+- [ ] **Cancellation is online, self-service, 24/7.** No phone call, written notice, or chat session required.
+- [ ] **Cancellation method is at least as easy as enrollment.** If signup is online in 5 clicks, cancellation can't take 6.
+- [ ] **Cancellation confirmation email sent** after cancellation is processed.
+- [ ] **Annual anniversary reminder** sent ~14 days before each yearly subscription anniversary, even for monthly subscriptions, summarizing usage and confirming auto-renewal continues. (Defensive against state requirements that apply to subscriptions over a year.)
+- [ ] **Material price change notice** — at least 30 days advance notice of any price increase before it takes effect. (ToS §5.)
+- [ ] **Click-through ToS** captured at signup and on first sign-in (per ToS §2). Acceptance recorded with user ID, timestamp, and ToS/Privacy version. See [Click-through ToS implementation](#click-through-tos-implementation).
+
+### Stripe settings to verify
+
+For Stripe Checkout (the recommended setup):
+
+- [ ] **Subscription mode** — enabled
+- [ ] **Subscription details displayed prominently** at checkout (price, frequency, cancellation policy)
+- [ ] **Automatic confirmation email** — enabled (Stripe sends this by default; double-check template)
+- [ ] **Customer Portal** — enabled, with cancellation option turned on
+- [ ] **Cancellation reason capture** — optional but useful for product feedback
+- [ ] **Tax handling** — configured per business setup (Stripe Tax or manual)
+- [ ] **California consent disclosure** — Stripe Checkout has built-in language; verify it's enabled OR use the recommended custom language below
+- [ ] **Past-due grace period** — 7 days configured to match ToS §5
+
+### CA-compliant disclosure language for checkout (the "magic words")
+
+California's Auto-Renewal Law (Bus. & Prof. Code §§17600–17606) requires "automatic renewal offer terms" to be presented "clearly and conspicuously" in "visual proximity" to the request for consent. The disclosure must include:
+
+1. The recurring nature of the charges
+2. The amount of the charge (and that it may change, with the new amount if known)
+3. The length of the renewal term, or that the service is continuous
+4. The minimum purchase obligation, if any
+5. A description of the cancellation policy
+
+**Recommended display text near the Subscribe / Sign up button:**
+
+```
+[Product Name] — [Plan name]
+$X.XX per [month/year], billed automatically each [month/year] until you cancel.
+
+You can cancel anytime online by going to [path to cancellation, e.g., 
+Admin → Billing → Manage Subscription]. Cancellation takes effect at the end 
+of your current billing period.
+
+By clicking "Subscribe", you agree to these recurring charges and to our 
+[Terms of Service](link) and [Privacy Policy](link).
+```
+
+**Required elements** present in the recommended text above:
+
+- ✅ Recurring nature ("billed automatically each [period]")
+- ✅ Amount ("$X.XX per [period]")
+- ✅ Length of renewal term ("until you cancel" — continuous)
+- ✅ Cancellation method ("online, by going to [path]")
+- ✅ Cancellation effective date ("end of your current billing period")
+- ✅ Affirmative consent ("By clicking 'Subscribe'")
+- ✅ Linked to legal docs
+
+**Confirmation email template should also include:**
+
+- Plan name
+- Recurring charge amount and frequency
+- Next charge date
+- How to cancel (link to Manage Subscription)
+- Acknowledgment that the user authorized the recurring charges
+
+### Renewal reminder schedule (state-by-state-safe approach)
+
+Different states have different reminder requirements. The "any state" defensive schedule:
+
+| Trigger | Reminder type | Timing |
+|---|---|---|
+| Annual subscription anniversary (or 12 months of cumulative active subscription) | Renewal reminder + summary of usage + confirmation auto-renewal continues | ~14 days before anniversary |
+| Material price change | Pricing change notice | ≥30 days before change takes effect |
+| Trial expiration (if any) | Trial-ending notification with explicit "won't auto-charge" language | ~3 days before trial ends |
+| Past-due payment | Notification + grace period reminder | At fail-time and ~5 days into the 7-day grace |
+| Cancellation processed | Cancellation confirmation | Immediately after cancellation |
+
+**Skip reminders if:**
+
+- The subscription has been cancelled (don't spam ex-customers)
+- The user has unsubscribed from all marketing email — but **continue sending transactional reminders** (renewal, price change, cancellation), tagged as transactional. Transactional email isn't governed by marketing-email opt-out.
+
+**Why annual anniversaries matter for monthly subscriptions:** Some state laws and emerging interpretations of CARLA apply renewal-reminder requirements to any subscription that has run for over a year, even if billed monthly. Sending an annual reminder is cheap insurance.
+
+### Documented consent flow
+
+For audit purposes, document the actual flow of consent for each product. Update this section when implementing or changing the flow.
+
+**WebCenter consent flow (current; verify on each release):**
+
+1. **Sign-up page (B2B firm admin self-signup)** — admin enters firm name, location, admin name, username, email, and password. Link to ToS and Privacy Policy displayed below the Sign-up button.
+2. **Pre-checkout disclosure (when upgrading to a paid plan)** — plan details, price, recurring nature, and cancellation policy displayed in visual proximity to the Subscribe button.
+3. **ToS + Privacy Policy acceptance** — captured by clicking Sign up / Subscribe with the inline notice present.
+4. **Stripe Checkout** — payment details + Stripe's automatic disclosure of recurring charges.
+5. **Confirmation email** — sent by Stripe with subscription summary and cancellation link.
+6. **First sign-in (Authorized User from invitation)** — click-through ToS + Privacy Policy modal. Acceptance recorded with user ID, timestamp, IP, ToS/Privacy version.
+7. **In-app billing page** — always-visible plan status + Manage Subscription button → Stripe Customer Portal.
+8. **Cancellation flow** — Manage Subscription → Stripe Portal → confirm cancellation → confirmation email sent. Access continues until end of period.
+
+When adding a new product, document its actual consent flow here as a parallel subsection.
+
+### Click-through ToS implementation
+
+Per ToS §2, every Authorized User must accept the ToS on first sign-in. Implementation requirements:
+
+- [ ] **Modal on first successful sign-in** (post-invitation acceptance OR self-signup)
+- [ ] **Modal contents:**
+  - Brief intro paragraph
+  - Links to full Terms of Service and Privacy Policy
+  - Single "I agree and continue" button
+- [ ] **Acceptance recorded:**
+  - User ID
+  - Timestamp (UTC)
+  - Version of ToS accepted (e.g., `2026-05-06`)
+  - Version of Privacy Policy accepted
+  - IP address
+- [ ] **Re-prompt logic:**
+  - Material ToS update → re-prompt all existing users on next sign-in
+  - Material Privacy Policy update → re-prompt
+  - Show what's new since last acceptance
+- [ ] **UI:**
+  - Cannot be dismissed without acceptance
+  - Cannot bypass the modal to use the app
+
+### What requires outside counsel review before non-beta GA
+
+- Final CARLA-compliant disclosure language (the "magic words" above are a strong starting point but specific phrasing matters; review with attorney)
+- Click-to-Cancel rule compliance once the legal status stabilizes
+- State-specific renewal reminder schedules for any state where you onboard 100+ customers
+- Documentation of the consent flow as it actually operates (screenshots, email templates, timestamps) — for audit defense
+
+---
+
 ## Pre-launch verification
 
 Before announcing the product:
 
 - [ ] Privacy policy updated with all five surgical edits (or fewer, as applicable). The "Last updated" date is current. The change is described in the email to existing subscribers.
 - [ ] Terms of service updated (or beta caveat covers it).
+- [ ] **Subscription billing & auto-renewal compliance** — every operational commitment in that section is implemented in the product. Specifically: free trial doesn't auto-charge; checkout displays the CA-compliant disclosure; click-through ToS captures user acceptance; cancellation works in the Stripe portal; confirmation emails fire correctly.
 - [ ] All env vars set in Vercel; production deploy is healthy.
 - [ ] Test the new product's email signup form end-to-end:
   - Submit your own email
