@@ -169,13 +169,13 @@ const lastUpdated = '2026-05-05';
 
         <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-zinc-100">WebCenter — cross-firm privacy boundary</h3>
         <p class="mt-3">
-          WebCenter lets one employee account span multiple firms (helpful when, for example, a tax preparer works at two firms during the season). When an employee's account is linked across firms, we maintain a strict privacy boundary: <strong>each firm sees only its own data</strong>. A firm never sees that an employee works at another firm, and never sees data from another firm in any export, report, or admin view.
+          WebCenter lets one employee account span multiple firms (helpful when, for example, a tax preparer works at two firms during the season). When an employee's account is linked across firms, we maintain a privacy boundary designed so that <strong>each firm sees only its own data</strong>. Our application's interfaces — including reports, exports, and admin views — are designed so that a firm does not see data from another firm, or any indication that an employee works at another firm.
         </p>
         <p class="mt-3">
-          This boundary is enforced in the application's data layer. The only place WebCenter ever surfaces cross-firm information is in the employee's <em>own</em> "My Schedule" view, where we may show that the employee has overlapping shifts at different firms — that warning is for the employee to act on and is never shared with any firm.
+          This boundary is implemented in the application's data layer through request-scoped database access controls. The only place WebCenter surfaces cross-firm information is in the employee's <em>own</em> "My Schedule" view, where we may show that the employee has overlapping shifts at different firms — that warning is for the employee to act on and is not shared with any firm.
         </p>
         <p class="mt-3">
-          Like any software system, this boundary depends on our software working as designed. We test it, design our database access pattern to fail closed, and treat any breach of the boundary as a data security incident (see <a href="#breach" class="underline">section 13</a>).
+          Like any software system, this boundary depends on our software operating as designed. We test it, design our database access pattern to fail closed (a misconfigured query returns no data rather than another firm's data), and treat any breach of the boundary as a data security incident (see <a href="#breach" class="underline">section 13</a>).
         </p>
       </div>
 
