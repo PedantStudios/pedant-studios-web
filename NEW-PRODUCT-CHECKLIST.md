@@ -283,60 +283,119 @@ Each is something the ToS commits to. If the product can't deliver, the ToS is m
 - [ ] **Material price change notice** — at least 30 days advance notice of any price increase before it takes effect. (ToS §5.)
 - [ ] **Click-through ToS** captured at signup and on first sign-in (per ToS §2). Acceptance recorded with user ID, timestamp, and ToS/Privacy version. See [Click-through ToS implementation](#click-through-tos-implementation).
 
-### Stripe settings to verify
+### What Stripe handles vs. what we handle
 
-For Stripe Checkout (the recommended setup):
+> **Critical context:** Stripe Checkout and the Customer Portal handle some auto-renewal compliance requirements automatically, but several CARLA / AB 2863 items are **not** built-in. **Stripe does not have a "California compliance mode."** The default Checkout consent is a generic "I agree to ToS" checkbox — it does not include CARLA's required disclosures of recurring nature, amount, frequency, or cancellation policy. We must layer those ourselves.
 
-- [ ] **Subscription mode** — enabled
-- [ ] **Subscription details displayed prominently** at checkout (price, frequency, cancellation policy)
-- [ ] **Automatic confirmation email** — enabled (Stripe sends this by default; double-check template)
-- [ ] **Customer Portal** — enabled, with cancellation option turned on
-- [ ] **Cancellation reason capture** — optional but useful for product feedback
-- [ ] **Tax handling** — configured per business setup (Stripe Tax or manual)
-- [ ] **California consent disclosure** — Stripe Checkout has built-in language; verify it's enabled OR use the recommended custom language below
-- [ ] **Past-due grace period** — 7 days configured to match ToS §5
+Below is the gap analysis. Anything in the "We handle" column is a build item before non-beta GA.
 
-### CA-compliant disclosure language for checkout (the "magic words")
+| Compliance requirement | Stripe handles | We handle |
+|---|---|---|
+| **ToS consent collection** | ✅ Checkbox via `consent_collection.terms_of_service='required'`; acceptance recorded in `Session.consent.terms_of_service` | Provide ToS URL; customize checkbox text via `custom_text.terms_of_service_acceptance.message` |
+| **CARLA-required disclosures** (recurring nature, cancellation policy, recurring charge amount, length, minimum obligation) | ❌ Not built-in. Generic "you'll be charged recurring" messaging only | Add statutory elements via `custom_text.submit.message` OR display on a pre-Checkout review page in our UI |
+| **"Clear and conspicuous" formatting** (larger type, contrasting color, marks set off) | ❌ Stripe Checkout uses standard styling | Style our pre-Checkout disclosure on our pages |
+| **Visual proximity to consent button** | ✅ Stripe positions consent near the pay button | Ensure our pre-Checkout disclosure is also adjacent to the action |
+| **Subscription confirmation email** | ✅ Receipt email auto-sends | Verify the receipt template includes recurring charge details and a cancellation link; customize via Stripe email branding if needed |
+| **Online click-to-cancel** | ✅ Cancel button in Customer Portal | Configure portal: cancellation enabled, optional reason capture, optional retention coupon |
+| **AB 2863: cancel button at least as prominent as retention offers** | ⚠️ Portal shows cancel alongside retention but visual prominence depends on config | Verify cancel button is no less visible than any retention coupon offer |
+| **Cancellation confirmation email** | ⚠️ Not clearly documented as automatic | Likely we send via our own webhook handler — verify or implement |
+| **Annual renewal reminders** | ❌ Not built-in | Implement: cron + email template (use Resend) |
+| **Material price change notification (≥30 days advance)** | ❌ Not built-in. `subscription.updated` webhook fires but doesn't email | Webhook handler + email template — on us |
+| **3-year consent record retention** (CARLA requirement) | ⚠️ Stripe stores Session/Customer objects, but lifecycle and CARLA-suitability undocumented | Store our own consent log: user ID, timestamp, ToS version, Privacy version, IP, browser. Don't rely on Stripe alone |
+| **Trial that doesn't auto-charge** | ✅ Two ways: Stripe trial with no payment method required, OR keep trial entirely outside Stripe | Pick approach; configure |
+| **Past-due grace period (7 days)** | ✅ Configurable via Smart Retries / dunning | Configure to match ToS §5 |
+| **Tax handling** | ✅ Stripe Tax or manual | Configure per business setup |
 
-California's Auto-Renewal Law (Bus. & Prof. Code §§17600–17606) requires "automatic renewal offer terms" to be presented "clearly and conspicuously" in "visual proximity" to the request for consent. The disclosure must include:
+### CA-compliant disclosure language for checkout (CARLA / AB 2863)
 
-1. The recurring nature of the charges
-2. The amount of the charge (and that it may change, with the new amount if known)
-3. The length of the renewal term, or that the service is continuous
-4. The minimum purchase obligation, if any
-5. A description of the cancellation policy
+California's Auto-Renewal Law (Bus. & Prof. Code §§17600–17606), as amended by **AB 2863 effective July 1, 2025**, requires "automatic renewal offer terms" to be:
 
-**Recommended display text near the Subscribe / Sign up button:**
+1. **Substantively complete** — must include all five elements listed below
+2. **Clear and conspicuous** — formatted distinctively from surrounding text per the statutory definition
+3. **In visual proximity** to the consent action
+
+#### Substantive elements (all five must be present)
+
+1. **Subscription continues until consumer cancels** — explicit statement
+2. **Description of the cancellation policy**
+3. **Recurring charges** — amount, frequency, and disclosure that the amount may change (with new amount if known)
+4. **Length of renewal term** OR that the service is continuous
+5. **Minimum purchase obligation, if any**
+
+For free trials, additionally:
+
+- **Clear and conspicuous explanation of the price after trial ends** OR how subscription pricing will change at trial conclusion
+
+#### "Clear and conspicuous" formatting (per AB 2863 statutory definition)
+
+The statute itself defines what this means. Disclosure must use **at least one** of the following:
+
+- **Larger type** than surrounding text
+- **Contrasting type, font, or color** to surrounding text of the same size
+- **Set off** from surrounding text by symbols or marks that clearly call attention
+
+Position requirement: **before** and **in immediate proximity** to the Subscribe / Sign Up button.
+
+#### Recommended display text near the Subscribe button
 
 ```
 [Product Name] — [Plan name]
-$X.XX per [month/year], billed automatically each [month/year] until you cancel.
+$X.XX per [period], billed automatically each [period] until you cancel.
+The amount may change with at least 30 days' notice; the next charge
+on [date] will be $X.XX. No minimum-term commitment.
 
-You can cancel anytime online by going to [path to cancellation, e.g., 
-Admin → Billing → Manage Subscription]. Cancellation takes effect at the end 
-of your current billing period.
+Cancel anytime online from [path, e.g., Admin → Billing → Manage Subscription
+in WebCenter]. Cancellation takes effect at the end of your current billing
+period.
 
-By clicking "Subscribe", you agree to these recurring charges and to our 
+(For free trials, add: After your [N]-day free trial, you will be charged
+$X.XX per [period] unless you cancel before the trial ends. We will not
+auto-convert your trial to paid; you must explicitly upgrade.)
+
+By clicking "Subscribe", you agree to these recurring charges and to our
 [Terms of Service](link) and [Privacy Policy](link).
 ```
 
-**Required elements** present in the recommended text above:
+The block above should be **styled distinctively** (e.g., bordered box, larger type, or contrasting color) and placed **immediately adjacent** to the Subscribe button.
 
-- ✅ Recurring nature ("billed automatically each [period]")
-- ✅ Amount ("$X.XX per [period]")
-- ✅ Length of renewal term ("until you cancel" — continuous)
-- ✅ Cancellation method ("online, by going to [path]")
-- ✅ Cancellation effective date ("end of your current billing period")
-- ✅ Affirmative consent ("By clicking 'Subscribe'")
-- ✅ Linked to legal docs
+#### Required elements coverage
 
-**Confirmation email template should also include:**
+- ✅ Recurring nature: "billed automatically each [period] until you cancel"
+- ✅ Amount + change disclosure: "$X.XX per [period]... amount may change with 30 days' notice"
+- ✅ Renewal term: "until you cancel" (continuous)
+- ✅ Minimum: "No minimum-term commitment"
+- ✅ Cancellation policy: "Cancel anytime online from [path]... at the end of your current billing period"
+- ✅ Free-trial: explicit no-auto-convert language
+- ✅ Affirmative consent: "By clicking 'Subscribe'"
+- ✅ ToS + Privacy links
 
-- Plan name
-- Recurring charge amount and frequency
-- Next charge date
-- How to cancel (link to Manage Subscription)
-- Acknowledgment that the user authorized the recurring charges
+#### Click-to-cancel UX requirements (AB 2863)
+
+The cancellation flow must:
+
+- [ ] Be **online** (no phone, no email, no chat-only) since signup is online
+- [ ] Be **at least as easy as enrollment** — same number of clicks or fewer
+- [ ] Be **timely** — no artificial delays or "we'll process within X days" friction
+- [ ] Display the **cancel option at least as prominently** as any retention offer (coupon, pause, downgrade) — if you offer retention, the cancel button must be visible alongside it, not buried behind it
+
+#### Acknowledgment email after enrollment
+
+Required by both CARLA and ROSCA. Stripe sends an automatic receipt email; **verify it includes**:
+
+- [ ] Plan name and recurring charge amount + frequency
+- [ ] Next charge date
+- [ ] Acknowledgment that the user authorized recurring charges
+- [ ] Direct link to the cancellation flow
+- [ ] Statement of the cancellation policy
+
+If Stripe's default receipt is missing any of these, customize via Stripe email branding OR send a follow-up acknowledgment via Resend.
+
+#### Consent record retention (CARLA 3-year rule)
+
+CARLA requires that records of the consumer's consent be retained for at least three years, or one year after the contract is terminated, whichever is longer.
+
+- [ ] Maintain our own consent log table (don't rely on Stripe Session retention alone), with: user ID, timestamp (UTC), ToS version, Privacy version, IP address, user agent, and Stripe Session ID for cross-reference
+- [ ] Retention policy: keep for 3 years minimum; tie to user record's termination date
 
 ### Renewal reminder schedule (state-by-state-safe approach)
 
