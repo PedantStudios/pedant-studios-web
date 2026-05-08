@@ -16,6 +16,7 @@ Decide these things first because they shape everything below.
 - [ ] **Data categories collected** — list them concretely. Will inform the privacy-policy disclosure.
 - [ ] **Sub-processors** — will the product use a new service (analytics, email, storage) not already on the global list? If yes, add it to the privacy policy.
 - [ ] **Beta vs. GA** — if launching as beta, the existing beta notice in the privacy policy still covers it. If launching as GA (no beta caveat), get the privacy policy and ToS reviewed by counsel before going live.
+- [ ] **DMCA / copyright takedown surface** — Does this product expose any user-generated content beyond internal-only messaging? Examples: public comments, file uploads, shared documents, public profiles, customer-facing forums. If yes, **re-evaluate whether to register a DMCA agent** with the U.S. Copyright Office (~$6 + ~1 hour) and add a takedown section to the ToS. The current Pedant Studios stance is no DMCA registration — WebCenter's only user-content surface is private firm-internal messaging, so DMCA risk is minimal. New products with broader content surfaces may flip the cost-benefit. Document the evaluation outcome in this product's launch notes regardless of decision.
 
 ---
 
