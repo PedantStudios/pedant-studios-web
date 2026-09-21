@@ -9,6 +9,10 @@ export default defineConfig({
   site: 'https://pedantstudios.com',
   output: 'static',
   adapter: vercel(),
+  redirects: {
+    // Product renamed WebCenter → Pedant Clok (2026-07-05); preserve old URL's SEO.
+    '/webcenter': { status: 301, destination: '/clok' },
+  },
   integrations: [
     sitemap(),
   ],

@@ -5,7 +5,7 @@ export const prerender = false;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const ALLOWED_LISTS = ['general', 'webcenter'] as const;
+const ALLOWED_LISTS = ['general', 'clok', 'webcenter'] as const;
 type ListName = (typeof ALLOWED_LISTS)[number];
 
 interface SubscribePayload {
@@ -17,8 +17,8 @@ interface SubscribePayload {
 
 /**
  * Map a list name to the configured Resend Topic ID. Each form opts into ONE
- * topic only — homepage signups get the General topic, WebCenter signups get
- * the WebCenter topic. This keeps each form's implicit promise narrow.
+ * topic only — homepage signups get the General topic, Clok signups get
+ * the Clok topic. This keeps each form's implicit promise narrow.
  *
  * Recipients can opt into the other topic later via the Resend-hosted
  * preferences page on any email they receive (Public visibility on both
@@ -27,6 +27,10 @@ interface SubscribePayload {
 function getTopicId(list: ListName): string | undefined {
   const env = import.meta.env;
   switch (list) {
+    // 'webcenter' is the product's pre-rename list name; both map to the same
+    // Resend topic. The env var keeps its historical name until it's renamed
+    // in Vercel and here together.
+    case 'clok':
     case 'webcenter':
       return env.RESEND_TOPIC_ID_WEBCENTER;
     case 'general':

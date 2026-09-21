@@ -13,15 +13,15 @@ const isActive = (href: string) => pathname === href || (href !== '/' && pathnam
     </a>
     <nav aria-label="Primary" class="flex items-center gap-6 text-sm">
       <a
-        href="/webcenter"
+        href="/clok"
         class:list={[
           'no-underline transition-colors',
-          isActive('/webcenter')
+          isActive('/clok')
             ? 'text-brand-700 dark:text-brand-400 font-medium'
             : 'text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100',
         ]}
       >
-        WebCenter
+        Clok
       </a>
       <a
         href="https://docs.pedantstudios.com"

@@ -14,7 +14,8 @@ interface ContactPayload {
   website?: string;
 }
 
-const ALLOWED_TOPICS = new Set(['general', 'webcenter', 'partnership', 'press', 'other']);
+// 'webcenter' kept for cached pages submitting the pre-rename topic value.
+const ALLOWED_TOPICS = new Set(['general', 'clok', 'webcenter', 'partnership', 'press', 'other']);
 
 export const POST: APIRoute = async ({ request }) => {
   let body: ContactPayload;
