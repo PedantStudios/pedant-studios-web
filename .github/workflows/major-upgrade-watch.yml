@@ -1,0 +1,32 @@
+name: Major upgrade watch
+
+# Opens a GitHub issue when a newer major version exists for packages whose
+# major bumps Dependabot is configured to ignore (see .github/dependabot.yml).
+# Keep PACKAGES below in sync with that ignore list.
+
+on:
+  schedule:
+    - cron: "0 12 * * 1" # Mondays, 12:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      PACKAGES: astro @astrojs/vercel
+      LOCKFILE: package-lock.json
+      LABEL: major-upgrade
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Ensure label exists
+        run: gh label create "$LABEL" --force --color C5DEF5 --description "A newer major version is available for consideration"
+
+      - name: Check for newer majors
+        run: .github/scripts/major-upgrade-watch.sh

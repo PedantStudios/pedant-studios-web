@@ -1,0 +1,62 @@
+# Dependabot version updates.
+# Security updates are enabled separately in the repo's Security settings.
+# Docs: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  # Astro site — the only npm manifest in the repo (root).
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: chore(deps)
+      prefix-development: chore(deps-dev)
+    # Grouping keeps related packages moving in lock-step and cuts PR noise.
+    # A dependency lands in the FIRST group whose patterns match it.
+    # Every group is limited to minor + patch so a major always arrives as
+    # its own PR and is decided on its own.
+    groups:
+      astro:
+        patterns:
+          - astro
+          - "@astrojs/*"
+        update-types:
+          - minor
+          - patch
+      tailwind:
+        patterns:
+          - tailwindcss
+          - "@tailwindcss/*"
+        update-types:
+          - minor
+          - patch
+      # Everything else: one weekly PR for minor + patch bumps.
+      # Major bumps of ungrouped packages still get their own PR.
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Majors ignored here are watched by .github/workflows/major-upgrade-watch.yml,
+      # which opens an issue when a newer major appears. Keep its PACKAGES list in sync.
+      # Astro 7 (and the matching Vercel adapter major) is a framework migration —
+      # do it deliberately, both packages together.
+      - dependency-name: astro
+        update-types:
+          - version-update:semver-major
+      - dependency-name: "@astrojs/vercel"
+        update-types:
+          - version-update:semver-major
+
+  # Actions used by .github/workflows/*.yml.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: chore(deps)
