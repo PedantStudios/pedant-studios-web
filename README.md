@@ -31,7 +31,7 @@ Required for forms to work in production. See `.env.example` for the full list.
 | `RESEND_API_KEY` | Resend API key |
 | `RESEND_FROM_EMAIL` | Verified sender (e.g., `noreply@pedantstudios.com`) |
 | `RESEND_TOPIC_ID_GENERAL` | Resend Topic ID for the *general* Pedant Studios updates list (homepage form) |
-| `RESEND_TOPIC_ID_WEBCENTER` | Resend Topic ID for the *WebCenter waitlist* (WebCenter page form) |
+| `RESEND_TOPIC_ID_CLOK` | Resend Topic ID for the *Pedant Clok waitlist* (Clok page form) |
 | `CONTACT_TO_EMAIL` | Where contact-form emails and new-subscriber notifications are delivered |
 
 For local dev, copy `.env.example` to `.env.local` and fill in.

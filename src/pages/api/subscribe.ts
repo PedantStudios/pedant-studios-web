@@ -27,12 +27,11 @@ interface SubscribePayload {
 function getTopicId(list: ListName): string | undefined {
   const env = import.meta.env;
   switch (list) {
-    // 'webcenter' is the product's pre-rename list name; both map to the same
-    // Resend topic. The env var keeps its historical name until it's renamed
-    // in Vercel and here together.
+    // 'webcenter' is the product's pre-rename list name, kept for cached
+    // pages; both map to the same Resend topic.
     case 'clok':
     case 'webcenter':
-      return env.RESEND_TOPIC_ID_WEBCENTER;
+      return env.RESEND_TOPIC_ID_CLOK;
     case 'general':
     default:
       return env.RESEND_TOPIC_ID_GENERAL;
