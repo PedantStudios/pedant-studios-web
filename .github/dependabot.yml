@@ -40,17 +40,9 @@ updates:
         update-types:
           - minor
           - patch
-    ignore:
-      # Majors ignored here are watched by .github/workflows/major-upgrade-watch.yml,
-      # which opens an issue when a newer major appears. Keep its PACKAGES list in sync.
-      # Astro 7 (and the matching Vercel adapter major) is a framework migration —
-      # do it deliberately, both packages together.
-      - dependency-name: astro
-        update-types:
-          - version-update:semver-major
-      - dependency-name: "@astrojs/vercel"
-        update-types:
-          - version-update:semver-major
+    # No ignored majors right now. If one gets deferred, add it here AND
+    # restore .github/workflows/major-upgrade-watch.yml so it stays visible
+    # (see pedant-studios-docs for the workflow + script to copy).
 
   # Actions used by .github/workflows/*.yml.
   - package-ecosystem: github-actions
